@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,24 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  private currentUser: User = {username: 'test', email: 'test@test.com'};
+
+  private hideEmail = false;
+
+  private toogle() {
+    this.hideEmail = !this.hideEmail;
+  }
+
+  private changeEmail(newEmail: string) {
+    this.currentUser.email = newEmail;
+  }
+
+
+
 }
+
+ interface User {
+    username: string;
+    email: string;
+  }
