@@ -1,0 +1,67 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {User,Admin,CampChef,DistrictChef,Volunteer} from '../entities/User'
+import {AuthService} from '../services/auth.service';
+
+
+declare const gapi: any;
+
+
+@Component({
+  selector: 'cmp-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit,OnDestroy {
+
+  login:string;
+  password:string;
+  submitted = false;
+  subscription:Subscription;
+  connected:boolean;
+  userSub:Subscription;
+  user:User;
+
+
+
+  constructor(private authService:AuthService) {
+    gapi.load('auth2', function () {
+      gapi.auth2.init()
+   });
+   }
+
+  ngOnInit() {
+    this.subscription=this.authService.userLogged.subscribe(isConnected=>
+      this.connected=isConnected
+    );
+
+    this.userSub=this.authService.user.subscribe((u:User)=>{this.user=u;
+  
+    });
+    
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+    this.userSub.unsubscribe();
+  }
+
+
+
+  onSubmit() { this.submitted = true;
+      this.authService.BasicAuth(this.login,this.password);
+    }
+
+  onFacebook(){
+    this.authService.FaceBookAuth();
+  }
+
+
+
+
+
+  onGoogle(){
+    this.authService.GoogleAuth();
+ }
+
+}

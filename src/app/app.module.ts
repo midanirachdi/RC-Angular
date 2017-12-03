@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppHeaderComponent } from './template/app-header/app-header.component';
@@ -20,6 +20,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { JobOffersComponent } from './job-offers/job-offers.component';
+import { LoginComponent } from './login/login.component';
+import {UserService} from './services/user.service';
+//Security
+import {AuthService} from './services/auth.service';
+import {jwtInterceptor} from './security/jwt.interceptor';
+import { FacebookModule } from 'ngx-facebook';
+
+
+
 
 const tabRoute:Routes=[
   {path:"jobOffers",component:JobOffersComponent},
@@ -39,17 +48,28 @@ const tabRoute:Routes=[
     TestimonialsectionComponent,
     FooterComponent,
     VolunteersectionComponent,
-    JobOffersComponent
+    JobOffersComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    FacebookModule.forRoot(),
     RouterModule.forRoot(tabRoute),
     ButtonModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: jwtInterceptor,
+      multi: true
+    },
+    AuthService,
+    UserService
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
