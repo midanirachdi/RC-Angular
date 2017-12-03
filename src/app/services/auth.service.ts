@@ -30,7 +30,7 @@ export class AuthService implements OnDestroy {
       xfbml: true,
       version: 'v2.8'
     };
- 
+
     fb.init(initParams);
 
     gapi.load('auth2', function () {
@@ -50,7 +50,7 @@ export class AuthService implements OnDestroy {
     this.http.get(LOGIN_URL,{
       headers: new HttpHeaders().set('Authorization',"Basic "+btoa(login+':'+psd)),
       observe: 'response',
-      responseType:'text' 
+      responseType:'text'
     }
     )
     .subscribe(
@@ -64,7 +64,7 @@ export class AuthService implements OnDestroy {
             localStorage.setItem('role',paylod.role)
             this.userLogged.next(true);
             this.userService.getMe().subscribe((u:User)=>this.user.next(u));
-            
+
         }
     );
   }
@@ -76,7 +76,7 @@ export class AuthService implements OnDestroy {
      this.http.get(LOGIN_URL,{
        headers: new HttpHeaders().set('Authorization',"ftoken "+response.authResponse.accessToken),
        observe: 'response',
-       responseType:'text' 
+       responseType:'text'
      }
      ).subscribe(data => {
       let barear=data.headers.get('Authorization');
@@ -88,13 +88,13 @@ export class AuthService implements OnDestroy {
         role:string;}=JwtHelper.prototype.decodeToken(barear);
         localStorage.setItem('role',paylod.role)
         this.userService.getMe().subscribe((u)=>{
-          
-          
+
+
           let temp=JSON.stringify(u);
           let myuser:User=UserMapper(temp);
           this.user.next(myuser);
-          
-       
+
+
         });
      })
                   })
@@ -106,12 +106,12 @@ export class AuthService implements OnDestroy {
     let googleAuth = gapi.auth2.getAuthInstance();
     googleAuth.then(() => {
        googleAuth.grantOfflineAccess().then((data:{code:string})=>{
-   
-      
+
+
         this.http.get(LOGIN_URL,{
           headers: new HttpHeaders().set('Authorization',"gtoken "+data.code),
           observe: 'response',
-          responseType:'text' 
+          responseType:'text'
         }
         ).subscribe(data=>{
           let barear=data.headers.get('Authorization');
@@ -124,8 +124,8 @@ export class AuthService implements OnDestroy {
               this.userLogged.next(true);
               this.userService.getMe().subscribe((u:User)=>this.user.next(u));
         })
-      
-      
+
+
       });
     });
   }
