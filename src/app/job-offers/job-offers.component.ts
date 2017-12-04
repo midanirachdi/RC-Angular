@@ -1,13 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Joboffer} from "../entities/joboffer";
 import {Refugee} from "../entities/refugee";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {JobofferService} from "../services/joboffer.service";
 import {DatePipe} from "@angular/common";
-import {AuthService} from "../services/auth.service";
-import {UserService} from "../services/user.service";
-import {Subscription} from "rxjs/Subscription";
-import {User} from "../entities/User";
+
 
 @Component({
   selector: 'app-job-offers',
@@ -15,13 +12,13 @@ import {User} from "../entities/User";
   styleUrls: ['./job-offers.component.css'],
   providers: [DatePipe]
 })
-export class JobOffersComponent implements OnInit,OnDestroy {
+export class JobOffersComponent implements OnInit{
 
   jobOffers: Joboffer[];
   refugees:Refugee[];
   jobOfferFound: Joboffer = null;
-  user:User;
-  userSub:Subscription;
+ // user:User;
+ // userSub:Subscription;
 
   etat = false;
   etat2 = false;
@@ -42,9 +39,7 @@ export class JobOffersComponent implements OnInit,OnDestroy {
   });
 
   constructor(private jobOfferService: JobofferService,
-              private datePipe: DatePipe,
-              private userService:UserService,
-              private authService:AuthService) {
+              private datePipe: DatePipe) {
   }
 
   ngOnInit() {
@@ -53,13 +48,8 @@ export class JobOffersComponent implements OnInit,OnDestroy {
         console.log(resp.json());
       }
     );*/
-
-  this.userSub=this.authService.user.subscribe((u:User)=>this.user=u);
-
   }
-  ngOnDestroy(){
-    this.userSub.unsubscribe();
-  }
+
   getAll() {
     this.etat = !this.etat;
     this.jobOfferService.getAllJobOffers().subscribe(
@@ -167,10 +157,7 @@ export class JobOffersComponent implements OnInit,OnDestroy {
       }
     );
   }
- /* glu(){
-    console.log('user sub '+this.userSub);
-    console.log('user '+this.user);
-  }*/
+
 
 
 }

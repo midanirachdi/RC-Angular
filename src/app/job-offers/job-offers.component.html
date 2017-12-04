@@ -1,70 +1,65 @@
 <app-slider></app-slider>
- <button (click)="getAll()">Get all job offers</button>
-        <button (click)="getById(1)">Get job offer with id 2</button>
-        <button (click)="getByDcId(4)">Get job offer with district chief id 4</button>
-        <button (click)="deleteJO(1)">delete job offer with id 2</button>
-        <button (click)="etat2=!etat2">Add job offer</button>
-        <button (click)="showUpdate(1)">update job offer 2</button>
-        <button (click)="getBestCandsEmail(2)">Get best candidates & email them</button>
-        <!--<button (click)="glu()">get logged user</button>-->
-        <div *ngIf="etat">
-          <ul *ngFor="let jo of jobOffers">
-            <li>{{jo.id}}</li>
-            <li>{{jo.description}}</li>
-            <li>{{jo.begindate}}</li>
-            <li>{{jo.enddate}}</li>
-            <li>{{jo.contactnumber}}</li>
-            <li>{{jo.fieldOfWork}}</li>
-            <li>{{jo.salaryEstimate}}</li>
-            <li>{{jo.companyName}}</li>
-            <li>{{jo.companyAdress}}</li>
-            <li>{{jo.contactEmail}}</li>
-            <li>{{jo.contactName}}</li>
-            <li>{{jo.title}}</li>
-            <li>{{jo.districtchef?.DistrictChef.firstName}}</li>
-            <li>{{jo.campchef?.CampChef.firstName}}</li>
-          </ul>
-        </div>
-        <div *ngIf="error!=''">
-          {{error}}
-        </div>
-        <br><br><br>
-        <div *ngIf="etat2">
-          <form [formGroup]="jobofferForm"
-                (ngSubmit)="onSubmit()">
-            title <input formControlName="title" type="text"><br>
-            contactName <input formControlName="contactN" type="text"><br>
-            companyName <input formControlName="companyN" type="text"><br>
-            companyAdress <input formControlName="companyA" type="text"><br>
-            contactEmail <input formControlName="contactE" type="text"><br>
-            description <textarea formControlName="desc" cols="30" rows="10"></textarea><br>
-            beginDate <input formControlName="bd" type="date"><br>
-            endDate <input formControlName="ed" type="date"><br>
-            contactNumber <input formControlName="contactNumber" type="number" pattern="[0-9]+"><br>
-            fieldOfWork <input formControlName="fow" type="text"><br>
-            salaryEstimate <input formControlName="salaryE" type="number" pattern="[0-9]+"><br>
-            <!--campChef
-            <select ngModel #cc name="cc">
-              <option value=""></option>
-            </select>-->
-            <button type="submit">ADD JO</button>
-          </form>
-        </div>
-        <div *ngIf="etat3">
-          <ul *ngFor="let r of refugees">
-            <li>{{r.firstname}} {{r.lastName}}</li>
-            <li>{{r.sex}}</li>
-            <li>{{r.dateOfBirth}}</li>
-            <li>{{r.nationality}}</li>
-            <li>{{r.frenchlanguageLevel}}</li>
-            <li>{{r.englishlanguageLevel}}</li>
-            <li>{{r.highestDegree}}</li>
-            <li>{{r.yearsOfExperience}}</li>
-            <li>{{r.email}}</li>
-            <li>{{r.fieldOfWork}}</li>
-            <li>{{r.adress}}</li>
-            <li>{{r.phoneNumber}}</li>
-          </ul>
-        </div>
+<button (click)="getAll()">Get all job offers</button>
+<button (click)="getById(1)">Get job offer with id 2</button>
+<button (click)="getByDcId(4)">Get job offer with district chief id 4</button>
+<button (click)="deleteJO(1)">delete job offer with id 2</button>
+<button (click)="etat2=!etat2">Add job offer</button>
+<button (click)="showUpdate(1)">update job offer 2</button>
+<button (click)="getBestCandsEmail(2)">Get best candidates & email them</button>
+<div *ngIf="etat">
+  <ul *ngFor="let jo of jobOffers">
+    <li>{{jo.id}}</li>
+    <li>{{jo.description}}</li>
+    <li>{{jo.begindate}}</li>
+    <li>{{jo.enddate}}</li>
+    <li>{{jo.contactnumber}}</li>
+    <li>{{jo.fieldOfWork}}</li>
+    <li>{{jo.salaryEstimate}}</li>
+    <li>{{jo.companyName}}</li>
+    <li>{{jo.companyAdress}}</li>
+    <li>{{jo.contactEmail}}</li>
+    <li>{{jo.contactName}}</li>
+    <li>{{jo.title}}</li>
+    <li>{{jo.districtchef?.DistrictChef.firstName}}</li>
+    <li>{{jo.campchef?.CampChef.firstName}}</li>
+  </ul>
+</div>
+<div *ngIf="error!=''">
+  {{error}}
+</div>
+<br><br><br>
+<div *ngIf="etat2">
+  <form [formGroup]="jobofferForm"
+        (ngSubmit)="onSubmit()">
+    title <input formControlName="title" type="text"><br>
+    contactName <input formControlName="contactN" type="text"><br>
+    companyName <input formControlName="companyN" type="text"><br>
+    companyAdress <input formControlName="companyA" type="text"><br>
+    contactEmail <input formControlName="contactE" type="text"><br>
+    description <textarea formControlName="desc" cols="30" rows="10"></textarea><br>
+    beginDate <input formControlName="bd" type="date"><br>
+    endDate <input formControlName="ed" type="date"><br>
+    contactNumber <input formControlName="contactNumber" type="number" pattern="[0-9]+"><br>
+    fieldOfWork <input formControlName="fow" type="text"><br>
+    salaryEstimate <input formControlName="salaryE" type="number" pattern="[0-9]+"><br>
+    <button type="submit">ADD JO</button>
+  </form>
+</div>
+<div *ngIf="etat3">
+  <ul *ngFor="let r of refugees">
+    <li>{{r.firstname}} {{r.lastName}}</li>
+    <li>{{r.sex}}</li>
+    <li>{{r.dateOfBirth}}</li>
+    <li>{{r.nationality}}</li>
+    <li>{{r.frenchlanguageLevel}}</li>
+    <li>{{r.englishlanguageLevel}}</li>
+    <li>{{r.highestDegree}}</li>
+    <li>{{r.yearsOfExperience}}</li>
+    <li>{{r.email}}</li>
+    <li>{{r.fieldOfWork}}</li>
+    <li>{{r.adress}}</li>
+    <li>{{r.phoneNumber}}</li>
+  </ul>
+</div>
 
 

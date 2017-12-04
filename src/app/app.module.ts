@@ -39,7 +39,7 @@ import {JobofferService} from "./services/joboffer.service";
 
 
 const tabRoute:Routes=[
-  {path:"",component:HomepageComponent},
+  {path:"",component:HomepageComponent,pathMatch: 'full'},
   {path:"jobOffers",component:JobOffersComponent},
   {path:"profile",component:ProfileComponent,
        children: [
