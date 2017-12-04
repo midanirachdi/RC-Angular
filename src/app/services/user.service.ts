@@ -33,8 +33,9 @@ export class UserService {
     this.http.post(USERS_URL,user).subscribe(data=>{});
   }
 
-  putUser(user:User){
-    this.http.put(USERS_URL,user).subscribe(data=>{});
+  putUser(user:string){
+    console.log(JSON.parse(user))
+    this.http.put(USERS_URL,JSON.parse(user),{responseType:'text'}).subscribe((data:string)=>console.log(data));
   }
 
 

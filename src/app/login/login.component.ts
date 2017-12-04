@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {User,Admin,CampChef,DistrictChef,Volunteer} from '../entities/User'
 import {AuthService} from '../services/auth.service';
-
+import {Router} from "@angular/router";
 
 declare const gapi: any;
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit,OnDestroy {
 
 
 
-  constructor(private authService:AuthService) {
+  constructor(private authService:AuthService,private router:Router) {
     gapi.load('auth2', function () {
       gapi.auth2.init()
    });
@@ -62,6 +62,12 @@ export class LoginComponent implements OnInit,OnDestroy {
 
   onGoogle(){
     this.authService.GoogleAuth();
+ }
+
+
+ onLogOut(){
+   this.authService.LogOut();
+   this.router.navigate(['/'])
  }
 
 }

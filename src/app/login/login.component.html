@@ -44,7 +44,11 @@
 </li>
 </ul>
 <ng-template #elseBlock>
-    <div class="nav navbar-nav navbar-right">
-        <nav class="nav nav-inline"><a href="#" class="nav-link"><span class="poweroff"></span><i class="fa fa-power-off" aria-hidden="true"></i></a> <a href="#" class="nav-link"><span class="ping"></span><i class="fa fa-envelope-o"></i></a> <a href="#" class="nav-link"><i class="fa fa-bell-o"></i></a> <a href="#" class="nav-link">{{user?.firstName}} {{user?.lastName}}<img class="img-circle img-profile" src="http://grafreez.com/wp-content/temp_demos/river/img/admin-bg.jpg"></a> </nav>
+    <div class="nav navbar-nav navbar-right" id="lged">
+        <nav class="nav nav-inline">
+            <a (click)="onLogOut()" class="nav-link"><span class="poweroff"></span><i class="fa fa-power-off" aria-hidden="true"></i></a> 
+            <a href="#" class="nav-link"><span class="ping"></span><i class="fa fa-envelope-o"></i></a>
+             <a href="#" class="nav-link"><i class="fa fa-bell-o"></i></a> 
+              <a routerLink='/profile' class="nav-link">{{user?.firstName}} {{user?.lastName}}</a> </nav>
       </div>
 </ng-template>

@@ -6,10 +6,17 @@ export function UserMapper(jsonUser:string):User{
     let type=jsonUser.substr(0,jsonUser.indexOf(':'));
     let user:User=UserFactory(type);
     jsonUser=jsonUser.substr(jsonUser.indexOf(':')+1);
+    let userImg=JSON.parse(jsonUser);
     user=JSON.parse(jsonUser);
+
+
+ 
     return user;
 }
 
+function setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
+    obj[key] = value;
+}
 
 function UserFactory(typ:string):User{
 
@@ -22,4 +29,11 @@ function UserFactory(typ:string):User{
         default : return null;
     }
 
+}
+
+
+export function userWrapper(typ:string,json:any){
+    let jsonStr=JSON.stringify(json);
+  return "{\""+typ+"\":"+jsonStr+"}";
+   
 }

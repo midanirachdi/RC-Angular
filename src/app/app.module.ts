@@ -28,6 +28,7 @@ import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {jwtInterceptor} from './security/jwt.interceptor';
 import { FacebookModule } from 'ngx-facebook';
+import { UserInfoComponent } from './template/profile/user-info/user-info.component';
 
 
 
@@ -36,6 +37,11 @@ import { FacebookModule } from 'ngx-facebook';
 const tabRoute:Routes=[
   {path:"",component:HomepageComponent},
   {path:"jobOffers",component:JobOffersComponent},
+  {path:"profile",component:ProfileComponent,
+       children: [
+          {path:"",component:UserInfoComponent}
+  ]
+}
 
 ];
 @NgModule({
@@ -55,7 +61,8 @@ const tabRoute:Routes=[
     JobOffersComponent,
     LoginComponent,
     HomepageComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
