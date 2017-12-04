@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Joboffer} from "../entities/joboffer";
-import {Refugee} from "../entities/refugee";
+import {Joboffer} from "../../../entities/joboffer";
+import {Refugee} from "../../../entities/refugee";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {JobofferService} from "../services/joboffer.service";
+import {JobofferService} from "../../../services/joboffer.service";
 import {DatePipe} from "@angular/common";
 
 
