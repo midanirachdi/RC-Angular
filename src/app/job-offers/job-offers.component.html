@@ -1,22 +1,70 @@
-<section class="feature-service-area">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-sm-6">
-          <p>job offers</p>
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <p>Lorem ipsum dolor sit amet, eirmod torquatos ei cum. Nec molestie electram repudiare cu, sed timeam euismod luptatum eu. Homero putent ei pri, eam in feugait alienum adolescens. Hinc fabulas sed in, cu mei eros velit altera. Wisi nostrud pro ne. Eos erat bonorum definitiones ad, eam ad dicta verterem invenire, ea bonorum feugait pro.
+<app-slider></app-slider>
+ <button (click)="getAll()">Get all job offers</button>
+        <button (click)="getById(1)">Get job offer with id 2</button>
+        <button (click)="getByDcId(4)">Get job offer with district chief id 4</button>
+        <button (click)="deleteJO(1)">delete job offer with id 2</button>
+        <button (click)="etat2=!etat2">Add job offer</button>
+        <button (click)="showUpdate(1)">update job offer 2</button>
+        <button (click)="getBestCandsEmail(2)">Get best candidates & email them</button>
+        <!--<button (click)="glu()">get logged user</button>-->
+        <div *ngIf="etat">
+          <ul *ngFor="let jo of jobOffers">
+            <li>{{jo.id}}</li>
+            <li>{{jo.description}}</li>
+            <li>{{jo.begindate}}</li>
+            <li>{{jo.enddate}}</li>
+            <li>{{jo.contactnumber}}</li>
+            <li>{{jo.fieldOfWork}}</li>
+            <li>{{jo.salaryEstimate}}</li>
+            <li>{{jo.companyName}}</li>
+            <li>{{jo.companyAdress}}</li>
+            <li>{{jo.contactEmail}}</li>
+            <li>{{jo.contactName}}</li>
+            <li>{{jo.title}}</li>
+            <li>{{jo.districtchef?.DistrictChef.firstName}}</li>
+            <li>{{jo.campchef?.CampChef.firstName}}</li>
+          </ul>
+        </div>
+        <div *ngIf="error!=''">
+          {{error}}
+        </div>
+        <br><br><br>
+        <div *ngIf="etat2">
+          <form [formGroup]="jobofferForm"
+                (ngSubmit)="onSubmit()">
+            title <input formControlName="title" type="text"><br>
+            contactName <input formControlName="contactN" type="text"><br>
+            companyName <input formControlName="companyN" type="text"><br>
+            companyAdress <input formControlName="companyA" type="text"><br>
+            contactEmail <input formControlName="contactE" type="text"><br>
+            description <textarea formControlName="desc" cols="30" rows="10"></textarea><br>
+            beginDate <input formControlName="bd" type="date"><br>
+            endDate <input formControlName="ed" type="date"><br>
+            contactNumber <input formControlName="contactNumber" type="number" pattern="[0-9]+"><br>
+            fieldOfWork <input formControlName="fow" type="text"><br>
+            salaryEstimate <input formControlName="salaryE" type="number" pattern="[0-9]+"><br>
+            <!--campChef
+            <select ngModel #cc name="cc">
+              <option value=""></option>
+            </select>-->
+            <button type="submit">ADD JO</button>
+          </form>
+        </div>
+        <div *ngIf="etat3">
+          <ul *ngFor="let r of refugees">
+            <li>{{r.firstname}} {{r.lastName}}</li>
+            <li>{{r.sex}}</li>
+            <li>{{r.dateOfBirth}}</li>
+            <li>{{r.nationality}}</li>
+            <li>{{r.frenchlanguageLevel}}</li>
+            <li>{{r.englishlanguageLevel}}</li>
+            <li>{{r.highestDegree}}</li>
+            <li>{{r.yearsOfExperience}}</li>
+            <li>{{r.email}}</li>
+            <li>{{r.fieldOfWork}}</li>
+            <li>{{r.adress}}</li>
+            <li>{{r.phoneNumber}}</li>
+          </ul>
+        </div>
 
-          Per omnis delenit at. Eu cum solum laboramus, an vis tantas officiis. Vitae dolorem mentitum sea in, mei ea quidam facilisis. Vim eligendi scribentur te, eu mei reque vocibus denique. His ne novum audiam, mei ad postea forensibus efficiantur. Vulputate voluptatibus per in, vero augue qui ad.
 
-          Gubergren abhorreant percipitur pri an, maiorum docendi sensibus et quo. Et iuvaret corrumpit mei, meliore albucius sit te. Dicta meliore pro at. Ex sea mutat expetendis, augue nusquam omittantur eos ea. Eu vel utroque inciderint.
-
-          Id munere utamur eleifend mea, mei ubique recusabo no, posse vivendum sea no. Eius sale ferri sea ei, veniam deleniti cu sea. Ex pri delenit mediocrem, novum quando inimicus pro ea, suas persius omittantur at pri. Habeo vitae cu nam, et qui ridens animal discere. Odio impetus volumus eos an, no aliquip tritani oportere has, ut pro magna movet luptatum. Ne duo fastidii accusamus vituperatoribus, eum dictas timeam te.
-
-          Per ut oratio putant corrumpit, illud indoctum sea ei, probo assueverit et nec. Laudem alienum atomorum sea no, modo facer nominavi ius in, quo diam vitae deleniti cu. Eu cum verear explicari maiestatis, ut eos nonumy conceptam consectetuer. Cibo quando placerat mea at, tota doming scaevola at his, ea mea ludus reprehendunt. Ea duo noluisse scriptorem.</p>
-      </div>
-
-    </div>
-  </div>
-
-</section>

@@ -17,7 +17,7 @@ import { VolunteersectionComponent } from './template/homepage/volunteersection/
 import {RouterModule, Routes} from "@angular/router";
 import {ButtonModule} from "primeng/primeng";
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { JobOffersComponent } from './job-offers/job-offers.component';
 import { HomepageComponent } from './template/homepage/homepage.component';
@@ -28,7 +28,11 @@ import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
 import {jwtInterceptor} from './security/jwt.interceptor';
 import { FacebookModule } from 'ngx-facebook';
+
 import { UserInfoComponent } from './template/profile/user-info/user-info.component';
+
+import {JobofferService} from "./services/joboffer.service";
+
 
 
 
@@ -71,7 +75,8 @@ const tabRoute:Routes=[
     HttpClientModule,
     FacebookModule.forRoot(),
     RouterModule.forRoot(tabRoute),
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
@@ -80,7 +85,8 @@ const tabRoute:Routes=[
       multi: true
     },
     AuthService,
-    UserService
+    UserService,
+    JobofferService
 
   ],
   bootstrap: [AppComponent]

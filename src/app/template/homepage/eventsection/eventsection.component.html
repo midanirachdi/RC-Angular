@@ -10,55 +10,21 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="event-list">
-                        <article class="event-item">
+                        <article *ngFor="let e of evenements" class="event-item">
                             <div class="image">
                                 <img src="assets/images/event/1.jpg" class="img-responsive" alt=" ">
                                 <div class="date green-ovelay">
-                                    <span class="day">15</span>
-                                    <span class="year">January 2017</span>
+                                    <span class="day">{{e.dateEvent|date:"EEEE"}}</span>
+                                    <span class="year">{{e.dateEvent|date:"dd"}} {{e.dateEvent|date:"MMMM"}} {{e.dateEvent|date:"y"}}</span>
                                 </div>
                             </div>
                             <div class="about-event">
-                                <h3>Auction photographs: Poor <br/>childrens smile</h3>
+                                <h3>{{e.name}}</h3>
                                 <div class="meta-describetion">
-                                    <span><i class="ion-clock green"></i>08:00 - 16:00</span>
-                                    <span><i class="ion-ios-location green"></i>90012 South Street, Sanford, FL</span>
+                                    <span><i class="ion-clock green"></i>{{e.dateEvent|date:"HH:mm"}}</span>
+                                    <span><i class="ion-ios-location green"></i>{{e.location}}</span>
                                 </div>
-                                <a href="#">Read More</a>
-                            </div>
-                        </article><!-- /.event-item -->
-                        <article class="event-item">
-                            <div class="image">
-                                <img src="assets/images/event/3.jpg" class="img-responsive" alt=" ">
-                                <div class="date naviblue-ovelay">
-                                    <span class="day">16</span>
-                                    <span class="year">February 2017</span>
-                                </div>
-                            </div>
-                            <div class="about-event">
-                                <h3>Campaign: <br/>Fundraising for meals</h3>
-                                <div class="meta-describetion">
-                                    <span><i class="ion-clock green"></i>08:00 - 16:00</span>
-                                    <span><i class="ion-ios-location green"></i>Sanfransico, CA</span>
-                                </div>
-                                <a href="#">Read More</a>
-                            </div>
-                        </article><!-- /.event-item -->
-                        <article class="event-item">
-                            <div class="image">
-                                <img src="assets/images/event/3.jpg" class="img-responsive" alt=" ">
-                                <div class="date orange-ovelay">
-                                    <span class="day">26</span>
-                                    <span class="year">March 2017</span>
-                                </div>
-                            </div>
-                            <div class="about-event">
-                                <h3>SPONSOR HOLISTIC CARE OF <br/>UNDERPRIVILEGED</h3>
-                                <div class="meta-describetion">
-                                    <span><i class="ion-clock green"></i>08:00 - 16:00</span>
-                                    <span><i class="ion-ios-location green"></i> Bronx NY, United States</span>
-                                </div>
-                                <a href="#">Read More</a>
+                                <a routerLink='/evenements/{{e.id}}'>Read More</a>
                             </div>
                         </article><!-- /.event-item -->
                     </div>
