@@ -31,6 +31,11 @@ import {FacebookModule} from 'ngx-facebook';
 import {UserInfoComponent} from './template/profile/user-info/user-info.component';
 
 import {JobofferService} from "./services/joboffer.service";
+import { NewsComponent } from './news/news.component';
+import { SinglepostfullComponent } from './news/singlepostfull/singlepostfull.component';
+import { Error404Component } from './template/errors/error404/error404.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {Jsonp, JsonpModule} from "@angular/http";
 
 
 const tabRoute: Routes = [
@@ -41,7 +46,11 @@ const tabRoute: Routes = [
       {path: "", component: UserInfoComponent, pathMatch: 'full'},
       {path: "joboffers", component: JobOffersComponent}
     ]
-  }
+  },
+  { path: 'news', component: NewsComponent},
+  { path: 'news/:id', component: SinglepostfullComponent },
+  { path: 'error404', component: Error404Component }
+
 
 ];
 
@@ -63,7 +72,10 @@ const tabRoute: Routes = [
     LoginComponent,
     HomepageComponent,
     ProfileComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    NewsComponent,
+    SinglepostfullComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
@@ -73,7 +85,9 @@ const tabRoute: Routes = [
     FacebookModule.forRoot(),
     RouterModule.forRoot(tabRoute),
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    JsonpModule
   ],
   providers: [
     {
