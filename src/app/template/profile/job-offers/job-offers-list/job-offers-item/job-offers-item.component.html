@@ -2,8 +2,8 @@
 
 
   <div class="row mNull mBot">
-    <div class="pull-right">
-      <div class="btn-group" role="group" aria-label="Basic example">
+    <div *ngIf="role==='DistrictChef'" class="pull-right">
+      <div  class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-warning">
           <span><i class="fa fa-pencil"></i></span></button>
         <button (click)="onDelete(joboffer)" type="button" class="btn btn-danger">

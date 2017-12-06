@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {JobofferService} from "../../../../services/joboffer.service";
 import {Joboffer} from "../../../../entities/joboffer";
+import {User} from "../../../../entities/User";
+import {AuthService} from "../../../../services/auth.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-job-offers-list',
@@ -11,12 +14,18 @@ export class JobOffersListComponent implements OnInit {
   jobOffers: Joboffer[];
   titleToSearch: string;
   etat = false;
-
-  constructor(private jobOfferService: JobofferService) {
+  userSub:Subscription;
+  user:User;
+  role:string;
+  constructor(private jobOfferService: JobofferService,private authService:AuthService) {
   }
 
   ngOnInit() {
     this.getJO();
+    this.userSub=this.authService.user.subscribe((u)=>{
+      this.user=u;
+    });
+    this.role=localStorage.getItem('role');
   }
 
   getJO() {

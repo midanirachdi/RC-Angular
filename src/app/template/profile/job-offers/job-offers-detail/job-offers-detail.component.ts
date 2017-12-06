@@ -4,6 +4,9 @@ import {JobofferService} from "../../../../services/joboffer.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {Refugee} from "../../../../entities/refugee";
+import {User} from "../../../../entities/User";
+import {Subscription} from "rxjs/Subscription";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-job-offers-detail',
@@ -15,12 +18,15 @@ export class JobOffersDetailComponent implements OnInit {
   @Input() etatInDetail:boolean;
   @Input() joInDetail: Joboffer;
   bestCands=false;
+  userSub:Subscription;
+  user:User;
+  role:string;
 
   refugees:Refugee[];
 
   jobOfferFound: Joboffer = null;
 
-  constructor(private jobofferService:JobofferService,private datePipe: DatePipe) { }
+  constructor(private jobofferService:JobofferService,private datePipe: DatePipe,private authService:AuthService) { }
 
   ngOnInit() {
     this.jobofferService.bestCands.subscribe(
@@ -28,6 +34,10 @@ export class JobOffersDetailComponent implements OnInit {
         this.bestCands = bestCands;
       }
     );
+    this.userSub=this.authService.user.subscribe((u)=>{
+      this.user=u;
+    });
+    this.role=localStorage.getItem('role');
   }
   jobofferForm = new FormGroup({
     title: new FormControl('', Validators.required),

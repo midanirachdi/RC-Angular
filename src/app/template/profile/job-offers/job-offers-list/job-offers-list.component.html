@@ -1,6 +1,6 @@
 <div class="row mBot">
   <div class="col-xs-12">
-    <button class="btn btn-success" (click)="showAddForm()">
+    <button *ngIf="role==='DistrictChef'" class="btn btn-success" (click)="showAddForm()">
       <span><i class="fa fa-plus"></i></span> New job offer</button>
     <div class="pull-right">
 
