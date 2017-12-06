@@ -1,0 +1,12 @@
+input[type="search"]::-webkit-search-cancel-button {
+  /*Bootstrap 4 override*/
+  -webkit-appearance: searchfield-cancel-button;
+}
+.mBot{
+  margin-bottom: 10px;
+}
+.scrollAndFixedHeight{
+  overflow-x:auto;height: 648px;
+}
+
+

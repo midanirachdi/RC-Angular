@@ -1,0 +1,21 @@
+<a (click)="onSelected()" class="list-group-item clearfix mBot5">
+
+
+  <div class="row mNull mBot">
+    <div class="pull-right">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-warning">
+          <span><i class="fa fa-pencil"></i></span></button>
+        <button (click)="onDelete(joboffer)" type="button" class="btn btn-danger">
+          <span><i class="fa fa-trash"></i></span></button>
+      </div>
+    </div>
+    <h3 class="list-group-item-heading">
+      {{ joboffer.title }}
+    </h3>
+  </div>
+  <p class="list-group-item-text">
+    {{ (joboffer.description | slice:0:196) + '...' }}
+  </p>
+
+</a>

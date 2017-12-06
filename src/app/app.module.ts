@@ -15,7 +15,7 @@ import {TestimonialsectionComponent} from './template/homepage/testimonialsectio
 import {FooterComponent} from './template/footer/footer.component';
 import {VolunteersectionComponent} from './template/homepage/volunteersection/volunteersection.component';
 import {RouterModule, Routes} from "@angular/router";
-import {ButtonModule} from "primeng/primeng";
+import {ButtonModule, CalendarModule, DialogModule} from "primeng/primeng";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JobOffersComponent} from './template/profile/job-offers/job-offers.component';
@@ -31,6 +31,12 @@ import {FacebookModule} from 'ngx-facebook';
 import {UserInfoComponent} from './template/profile/user-info/user-info.component';
 
 import {JobofferService} from "./services/joboffer.service";
+import {JobOffersListComponent} from './template/profile/job-offers/job-offers-list/job-offers-list.component';
+import {JobOffersItemComponent} from './template/profile/job-offers/job-offers-list/job-offers-item/job-offers-item.component';
+import {JobOffersDetailComponent} from './template/profile/job-offers/job-offers-detail/job-offers-detail.component';
+import { SearchJobOffersByTitlePipe} from './pipes/search-job-offers-by-title.pipe';
+import {SpeechService} from "./services/speech.service";
+
 
 
 const tabRoute: Routes = [
@@ -63,7 +69,11 @@ const tabRoute: Routes = [
     LoginComponent,
     HomepageComponent,
     ProfileComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    JobOffersListComponent,
+    JobOffersItemComponent,
+    JobOffersDetailComponent,
+    SearchJobOffersByTitlePipe
   ],
   imports: [
     BrowserModule,
@@ -73,7 +83,9 @@ const tabRoute: Routes = [
     FacebookModule.forRoot(),
     RouterModule.forRoot(tabRoute),
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogModule,
+    CalendarModule
   ],
   providers: [
     {
@@ -83,7 +95,8 @@ const tabRoute: Routes = [
     },
     AuthService,
     UserService,
-    JobofferService
+    JobofferService,
+    SpeechService
 
   ],
   bootstrap: [AppComponent]

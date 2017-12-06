@@ -1,0 +1,57 @@
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  color: black;
+  line-height: 100%;
+}
+.mBot{
+  margin-bottom: 20px;
+}
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.strike > span {
+  position: relative;
+  display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  /* Here is the modification */
+  height: 3px; /* space between lines */
+  margin-top: -2px; /* adjust vertical align */
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.strike > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.strike > span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+.mTop{
+  margin-top: 25px;
+}
+.form-control{
+  margin-bottom: 5px;
+}
+.mBot5{
+  margin-bottom: 5px;
+}

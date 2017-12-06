@@ -1,8 +1,8 @@
+import {JobofferService} from "../../../services/joboffer.service";
 import {Component, OnInit} from '@angular/core';
 import {Joboffer} from "../../../entities/joboffer";
 import {Refugee} from "../../../entities/refugee";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {JobofferService} from "../../../services/joboffer.service";
 import {DatePipe} from "@angular/common";
 
 
@@ -14,13 +14,15 @@ import {DatePipe} from "@angular/common";
 })
 export class JobOffersComponent implements OnInit{
 
+  joSelected: Joboffer;
   jobOffers: Joboffer[];
   refugees:Refugee[];
   jobOfferFound: Joboffer = null;
+  displayDetail = false;
  // user:User;
  // userSub:Subscription;
 
-  etat = false;
+  etat : boolean;
   etat2 = false;
   etat3 = false;
   error = '';
@@ -43,11 +45,18 @@ export class JobOffersComponent implements OnInit{
   }
 
   ngOnInit() {
-    /*this.userService.getAllUsers().subscribe(
-      (resp: Response) => {
-        console.log(resp.json());
+    this.jobOfferService.jobOfferSelected.subscribe(
+      (jo: Joboffer) => {
+        this.joSelected = jo;
+        if (this.joSelected !=null)
+          this.etat=false;
       }
-    );*/
+    );
+      this.jobOfferService.etat.subscribe(
+      (etat:boolean)=>{this.etat=etat;
+        if(this.etat==true)
+          this.joSelected=null}
+    );
   }
 
   getAll() {
@@ -159,5 +168,6 @@ export class JobOffersComponent implements OnInit{
   }
 
 
-
+  changeState(state:boolean){ this.displayDetail =!state;
+  console.log()}
 }
