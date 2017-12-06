@@ -1,0 +1,70 @@
+<!-- == Banner== -->
+<div class="banner-area"  >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="banner-title">
+          <h1>News</h1>
+
+          <h5 *ngIf="countryInfo!=null" class="white">{{countryInfo}}</h5>
+          <ul>
+            <li><a routerLink='/' >Home</a></li>
+            <li>|</li>
+            <li><a routerLink='/news' class="active">News</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // Banner -->
+<div class="blog-page mt85 mb60">
+  <div class="container">
+    <h3 *ngIf="countryInfo!=null">Recent news based on your location: {{countryInfo}}  | <a (click)="getNews(); countryInfo=null">  Worldwide News?</a></h3>
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-3">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-9 col-md-8">
+        <article class="blog-post " *ngFor="let n of news | paginate: { itemsPerPage: 2, currentPage: p }">
+          <div class="image">
+            <img src="http://localhost:18080/refugeesCamp-web/api/news/1/media/2090c0016a89e818c60f62c10cd92074.PNG" class="img-responsive" />
+          </div>
+          <div class="blog-text">
+            <div class="meta-description">
+                                <span class="post-date">
+                                    Posted : <a href="#">{{n.dateOfCreation}}</a>
+                                </span>
+              <span class="author-name">
+                                    Author :  <a href="#">{{n.author}}</a>
+                                </span>
+              <span class="post-categories">
+                                    Location : <a href="#">{{n.location}}</a>
+                                </span>
+              <a href="#" class="comment pull-right"><i class="fa fa-commenting-o" aria-hidden="true"></i>245</a>
+            </div>
+            <div class="blog-content">
+              <h3><a href="#">{{n.title}}</a></h3>
+              <p>
+                {{n.content}}
+              </p>
+              <a [routerLink]="['/news', n.id]"  class="green-button button-hover-one">Read More</a>
+            </div>
+          </div>
+          <br>
+        </article>
+
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-3">
+        <pagination-controls (click)="scrollUp()"  (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -445,10 +445,10 @@ ul {
 }
 .gradient-one {
   background: rgba(0, 188, 212, 0.84);
-  background: -webkit-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: -o-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: -moz-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -webkit-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -o-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -moz-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
 }
 /* -----------------------------------
 **   Top Bar
@@ -1268,7 +1268,7 @@ ul {
   position: relative;
 }
 .event-item .image .date span.day {
-  font-size: 35px;
+  font-size: 42px;
   line-height: 43px;
   display: block;
   padding-bottom: 18px;
@@ -1558,10 +1558,10 @@ ul {
   height: 100%;
   content: "";
   background: rgba(0, 188, 212, 0.84);
-  background: -webkit-linear-gradient(left, rgba(27, 85, 119, 0.94), rgba(41, 33, 71, 0.94));
-  background: -o-linear-gradient(left, rgba(27, 85, 119, 0.94), rgba(41, 33, 71, 0.94));
-  background: -moz-linear-gradient(left, rgba(27, 85, 119, 0.94), rgba(41, 33, 71, 0.94));
-  background: linear-gradient(left, rgba(27, 85, 119, 0.94), rgba(41, 33, 71, 0.94));
+  background: -webkit-linear-gradient(to left, rgba(27, 85, 119, 0.94), rgba(41, 33, 71, 0.94));
+  background: -o-linear-gradient(to left, rgba(27, 85, 119, 0.94), rgba(41, 33, 71, 0.94));
+  background: -moz-linear-gradient(to left, rgba(27, 85, 119, 0.94), rgba(41, 33, 71, 0.94));
+  background: linear-gradient(to left, rgba(27, 85, 119, 0.94), rgba(41, 33, 71, 0.94));
 }
 .blog-style-three .content {
   position: relative;
@@ -1608,10 +1608,10 @@ ul {
   height: 100%;
   content: "";
   background: rgba(0, 188, 212, 0.84);
-  background: -webkit-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: -o-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: -moz-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -webkit-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -o-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -moz-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
 }
 .testimonial-carousel-control-nav {
   margin-left: 15px;
@@ -1824,10 +1824,10 @@ ul {
   height: 100%;
   content: "";
   background: rgba(0, 188, 212, 0.84);
-  background: -webkit-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: -o-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: -moz-linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
-  background: linear-gradient(left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -webkit-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -o-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: -moz-linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
+  background: linear-gradient(to left, rgba(0, 188, 212, 0.84), rgba(41, 33, 71, 0.84));
 }
 .banner-title {
   text-align: center;
@@ -2421,9 +2421,9 @@ ul {
   top: calc(50% - 27px);
 }
 .upcoming-event-item:hover .green-button:hover {
-  background: -webkit-linear-gradient(top center, #00bcd4, #292147);
-  background: -moz-linear-gradient(top center, #00bcd4, #292147);
-  background: linear-gradient(top center, #00bcd4, #292147);
+  background: -webkit-linear-gradient(to top center, #00bcd4, #292147);
+  background: -moz-linear-gradient(to top center, #00bcd4, #292147);
+  background: linear-gradient(to top center, #00bcd4, #292147);
 }
 .upcoming-event-item .event-detail {
   margin-top: 25px;

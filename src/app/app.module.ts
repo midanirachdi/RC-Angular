@@ -38,6 +38,12 @@ import { SearchJobOffersByTitlePipe} from './pipes/search-job-offers-by-title.pi
 import {SpeechService} from "./services/speech.service";
 
 
+import { NewsComponent } from './news/news.component';
+import { SinglepostfullComponent } from './news/singlepostfull/singlepostfull.component';
+import { Error404Component } from './template/errors/error404/error404.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {Jsonp, JsonpModule} from "@angular/http";
+
 
 const tabRoute: Routes = [
   {path: "", component: HomepageComponent, pathMatch: 'full'},
@@ -47,7 +53,11 @@ const tabRoute: Routes = [
       {path: "", component: UserInfoComponent, pathMatch: 'full'},
       {path: "joboffers", component: JobOffersComponent}
     ]
-  }
+  },
+  { path: 'news', component: NewsComponent},
+  { path: 'news/:id', component: SinglepostfullComponent },
+  { path: 'error404', component: Error404Component }
+
 
 ];
 
@@ -73,7 +83,10 @@ const tabRoute: Routes = [
     JobOffersListComponent,
     JobOffersItemComponent,
     JobOffersDetailComponent,
-    SearchJobOffersByTitlePipe
+    SearchJobOffersByTitlePipe,
+    NewsComponent,
+    SinglepostfullComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
@@ -85,7 +98,9 @@ const tabRoute: Routes = [
     ButtonModule,
     ReactiveFormsModule,
     DialogModule,
-    CalendarModule
+    CalendarModule,
+    NgxPaginationModule,
+    JsonpModule
   ],
   providers: [
     {
