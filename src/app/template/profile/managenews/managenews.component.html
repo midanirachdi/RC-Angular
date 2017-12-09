@@ -1,0 +1,39 @@
+<div class="cont">
+<!-- Second navbar for sign in -->
+<nav class="navbar navbar-default">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-collapse-2">
+      <ul class="nav navbar-nav">
+        <li><a [routerLink]="['addnews']">Add News</a></li>
+      </ul>
+    </div>
+
+</nav>
+
+  <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <tr>
+      <td>Title</td>
+      <td>Date of creation</td>
+      <td>Author</td>
+      <td>Location</td>
+      <td>Edit</td>
+      <td>Delete</td>
+      <td>Upload Media</td>
+    </tr>
+
+
+    <tr *ngFor="let n of news ">
+      <td>{{n.title}}</td>
+      <td>{{n.dateOfCreation}}</td>
+      <td>{{n.author}}</td>
+      <td>{{n.location}}</td>
+      <!--bouttons d'action-->
+      <td><button>Edit</button></td>
+      <td><button>Delete</button></td>
+      <td><button>Upload Media</button></td>
+    </tr>
+
+  </table>
+
+</div>
