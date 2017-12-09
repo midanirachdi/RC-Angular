@@ -1,16 +1,16 @@
 .screen{
-    min-height: 800px;
+    min-height: 1500px;
     position: relative;
 }
 .side-menu{
     padding: 0;
-    margin-top:48px;
     height: 100%;
     background-color:#1a1822;
     position: absolute;
 }
 .img-profile{
     width: 60%;
+
     padding: 0;
     margin: auto;
     display: block;
@@ -18,8 +18,9 @@
 
 }
 
+
 .profile-info{
-    margin-top:30px;
+    margin-top:100px;
     margin-bottom:70px;
 }
 
@@ -43,8 +44,13 @@
     color:white;
     text-align: center;
 }
+.undernav{
+  height: 53.40px;
+  background-color: #1a1822;
+  margin-bottom: 20px;
+}
 .right-screen{
-    margin-top:48px;
+
     min-height: 100%;
     height: 100%;
     position: absolute;
@@ -53,7 +59,13 @@
     font-size: 0.7em;
 }
 
-
+.couleur{
+  color:inherit;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
 
 
 
