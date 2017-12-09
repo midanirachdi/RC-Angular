@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import { Response} from "@angular/http";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
@@ -7,6 +7,11 @@ import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class JobofferService {
+  jobOfferSelected = new EventEmitter<Joboffer>();
+  etat = new EventEmitter<boolean>();
+  bestCands = new EventEmitter<boolean>();
+
+  jobOffers =new EventEmitter<Joboffer[]>();
 
   url = "http://localhost:18080/refugeesCamp-web/api/joboffers";
   urlUserService = "http://localhost:18080/refugeesCamp-web/api/users";

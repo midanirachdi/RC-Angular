@@ -1,0 +1,18 @@
+<div class="row mBot">
+  <div class="col-xs-12">
+    <button *ngIf="role==='DistrictChef'" class="btn btn-success" (click)="showAddForm()">
+      <span><i class="fa fa-plus"></i></span> New job offer</button>
+    <div class="pull-right">
+
+   <input class="form-control" placeholder="Search..." type="search" [(ngModel)]="titleToSearch">
+    </div>
+  </div>
+</div>
+<div class="row scrollAndFixedHeight" >
+  <div class="col-xs-12">
+    <app-job-offers-item
+      *ngFor="let jobofferEl of jobOffers |searchJobOffersByTitle:titleToSearch"
+      [joboffer]="jobofferEl"></app-job-offers-item>
+  </div>
+</div>
+

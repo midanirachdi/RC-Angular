@@ -1,0 +1,117 @@
+<div *ngIf="joInDetail">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>{{ joInDetail.title}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-10">
+      <div class="strike">
+        <span>{{joInDetail.begindate | date:'fullDate' }}  <i class="fa fa-arrow-right"></i>   {{joInDetail.enddate | date:'fullDate'}}</span>
+      </div>
+
+      <p>Field of work : {{joInDetail.fieldOfWork}}</p>
+      <p>Salary estimate : {{joInDetail.salaryEstimate}}</p>
+      <button *ngIf="role==='CampChef'" class="btn btn-primary mBot5" (click)="getBestCandsEmail(joInDetail.id)">Get best candidates & email them
+      </button>
+    </div>
+  </div>
+<div *ngIf="!bestCands">
+  <div class="row">
+    <div class="col-xs-10">
+      <ul class="nav nav-tabs mBot" role="tablist">
+        <li class="nav-item active">
+          <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#contactDetails" role="tab">Contact details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#companyDetails" role="tab">Company details</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="description" role="tabpanel"> {{ joInDetail.description }}</div>
+        <div class="tab-pane" id="contactDetails" role="tabpanel">
+          <p><strong>Name: </strong>{{joInDetail.contactName}}</p>
+          <p><strong>Email: </strong>{{joInDetail.contactEmail}}</p>
+          <p><strong>Phone number: </strong>{{joInDetail.contactnumber}}</p>
+        </div>
+        <div class="tab-pane" id="companyDetails" role="tabpanel">
+          <p><strong>Name: </strong>{{joInDetail.companyName}}</p>
+          <p><strong>Address: </strong>{{joInDetail.companyAdress}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div *ngIf="etatInDetail" class="mTop">
+  <h1>Add a new job offer</h1>
+  <form [formGroup]="jobofferForm"
+        (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-xs-10">
+        <div class="col-xs-5">
+          <input placeholder="Title" class="form-control" required formControlName="title" type="text">
+          <textarea placeholder="Description" class="form-control" required formControlName="desc" cols="20"
+                    rows="3"></textarea>
+          <div class="mBot5">
+            <p-calendar
+              formControlName="bd"
+              showButtonBar="true"
+              [showIcon]="true"
+              placeholder="Start date"></p-calendar>
+          </div>
+          <div class="mBot5">
+            <p-calendar
+              formControlName="ed"
+              showButtonBar="true"
+              [showIcon]="true"
+              placeholder="End date"></p-calendar>
+          </div>
+          <input placeholder="Field of work" class="form-control" required formControlName="fow" type="text">
+
+          <input placeholder="Salary estimate" class="form-control" required formControlName="salaryE" type="number"
+                 pattern="[0-9]+">
+        </div>
+        <div class="col-xs-5">
+          <input placeholder="Contact name" class="form-control" required formControlName="contactN" type="text">
+          <input placeholder="Contact email" class="form-control" required formControlName="contactE" type="text">
+          <input placeholder="Contact number" class="form-control" required formControlName="contactNumber"
+                 type="number" pattern="[0-9]+">
+          <input placeholder="Company name" class="form-control" required formControlName="companyN" type="text">
+          <input placeholder="Company address" class="form-control" required formControlName="companyA" type="text">
+          <button
+            type="submit"
+            class="btn btn-primary">
+            <span><i class="fa fa-check"></i></span> Create
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div *ngIf="bestCands" class="mTop">
+
+  <ul *ngFor="let r of refugees">
+    <li>{{r.firstname}} {{r.lastName}}</li>
+    <li>{{r.sex}}</li>
+    <li>{{r.dateOfBirth}}</li>
+    <li>{{r.nationality}}</li>
+    <li>{{r.frenchlanguageLevel}}</li>
+    <li>{{r.englishlanguageLevel}}</li>
+    <li>{{r.highestDegree}}</li>
+    <li>{{r.yearsOfExperience}}</li>
+    <li>{{r.email}}</li>
+    <li>{{r.fieldOfWork}}</li>
+    <li>{{r.adress}}</li>
+    <li>{{r.phoneNumber}}</li>
+  </ul>
+
+</div>
+

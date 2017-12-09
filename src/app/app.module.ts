@@ -15,7 +15,7 @@ import {TestimonialsectionComponent} from './template/homepage/testimonialsectio
 import {FooterComponent} from './template/footer/footer.component';
 import {VolunteersectionComponent} from './template/homepage/volunteersection/volunteersection.component';
 import {RouterModule, Routes} from "@angular/router";
-import {ButtonModule} from "primeng/primeng";
+import {ButtonModule, CalendarModule, DialogModule} from "primeng/primeng";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JobOffersComponent} from './template/profile/job-offers/job-offers.component';
@@ -31,6 +31,13 @@ import {FacebookModule} from 'ngx-facebook';
 import {UserInfoComponent} from './template/profile/user-info/user-info.component';
 
 import {JobofferService} from "./services/joboffer.service";
+import {JobOffersListComponent} from './template/profile/job-offers/job-offers-list/job-offers-list.component';
+import {JobOffersItemComponent} from './template/profile/job-offers/job-offers-list/job-offers-item/job-offers-item.component';
+import {JobOffersDetailComponent} from './template/profile/job-offers/job-offers-detail/job-offers-detail.component';
+import { SearchJobOffersByTitlePipe} from './pipes/search-job-offers-by-title.pipe';
+import {SpeechService} from "./services/speech.service";
+
+
 import { NewsComponent } from './news/news.component';
 import { SinglepostfullComponent } from './news/singlepostfull/singlepostfull.component';
 import { Error404Component } from './template/errors/error404/error404.component';
@@ -84,6 +91,10 @@ const tabRoute: Routes = [
     HomepageComponent,
     ProfileComponent,
     UserInfoComponent,
+    JobOffersListComponent,
+    JobOffersItemComponent,
+    JobOffersDetailComponent,
+    SearchJobOffersByTitlePipe,
     NewsComponent,
     SinglepostfullComponent,
     Error404Component,
@@ -103,6 +114,8 @@ const tabRoute: Routes = [
     RouterModule.forRoot(tabRoute),
     ButtonModule,
     ReactiveFormsModule,
+    DialogModule,
+    CalendarModule,
     NgxPaginationModule,
     TrumbowygModule.forRoot({plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0'}), //Optional config : plug-ins and version
     JsonpModule,
@@ -116,7 +129,8 @@ const tabRoute: Routes = [
     },
     AuthService,
     UserService,
-    JobofferService
+    JobofferService,
+    SpeechService
 
   ],
   bootstrap: [AppComponent]
