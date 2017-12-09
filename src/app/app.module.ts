@@ -59,7 +59,7 @@ const tabRoute: Routes = [
   {
     path: "profile", component: ProfileComponent,
     children: [
-      {path: "", component: UserInfoComponent, pathMatch: 'full'},
+      {path: "home", component: UserInfoComponent, pathMatch: 'full'},
       {path: "joboffers", component: JobOffersComponent},
       {path: "managenews", component: ManagenewsComponent},
       {path: "managenews/addnews", component: AddnewsComponent}
