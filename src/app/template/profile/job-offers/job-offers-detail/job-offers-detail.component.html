@@ -1,4 +1,4 @@
-<div *ngIf="joInDetail">
+<div *ngIf="joInDetail " >
   <div class="row">
     <div class="col-xs-12">
       <h1>{{ joInDetail.title}}</h1>
@@ -12,11 +12,12 @@
 
       <p>Field of work : {{joInDetail.fieldOfWork}}</p>
       <p>Salary estimate : {{joInDetail.salaryEstimate}}</p>
-      <button *ngIf="role==='CampChef'" class="btn btn-primary mBot5" (click)="getBestCandsEmail(joInDetail.id)">Get best candidates & email them
+      <button *ngIf="role==='CampChef'" class="btn btn-primary mBot5" (click)="getBestCandsEmail(joInDetail.id)">Get
+        best candidates & email them
       </button>
     </div>
   </div>
-<div *ngIf="!bestCands">
+
   <div class="row">
     <div class="col-xs-10">
       <ul class="nav nav-tabs mBot" role="tablist">
@@ -29,6 +30,10 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#companyDetails" role="tab">Company details</a>
         </li>
+        <li class="nav-item" *ngIf="bestCands == true && refugees.length != 0">
+          <a class="nav-link" data-toggle="tab" href="#bestCandidates" role="tab">Best Candidates</a>
+        </li>
+
       </ul>
 
       <!-- Tab panes -->
@@ -43,35 +48,61 @@
           <p><strong>Name: </strong>{{joInDetail.companyName}}</p>
           <p><strong>Address: </strong>{{joInDetail.companyAdress}}</p>
         </div>
+        <div class="tab-pane" id="bestCandidates" role="tabpanel">
+          <div *ngFor="let r of refugees">
+            <p><strong>Name </strong>{{r.firstname}} {{r.lastName}}</p>
+            <p><strong>Gender </strong>{{r.sex}}</p>
+            <p><strong>Date of birth </strong>{{r.dateOfBirth}}</p>
+            <p><strong>Nationality </strong>{{r.nationality}}</p>
+            <p><strong>French language level </strong>{{r.frenchlanguageLevel}}</p>
+            <p><strong>English language level </strong>{{r.englishlanguageLevel}}</p>
+            <p><strong>Highest degree </strong>{{r.highestDegree}}</p>
+            <p><strong>Years of experience </strong>{{r.yearsOfExperience}}</p>
+            <p><strong>Email </strong>{{r.email}}</p>
+            <p><strong>Field of work </strong>{{r.fieldOfWork}}</p>
+            <p><strong>Adress </strong>{{r.adress}}</p>
+            <p><strong>Phone number </strong>{{r.phoneNumber}}</p>
+            <hr>
+          </div>
+        </div>
       </div>
     </div>
+
+
   </div>
 </div>
-</div>
+
+
 <div *ngIf="etatInDetail" class="mTop">
-  <h1>Add a new job offer</h1>
+  <h1>{{jobOfferFound === null? "Add ":"Update "}}a job offer</h1>
   <form [formGroup]="jobofferForm"
         (ngSubmit)="onSubmit()">
 
     <div class="row">
       <div class="col-xs-10">
         <div class="col-xs-5">
-          <input placeholder="Title" class="form-control" required formControlName="title" type="text">
-          <textarea placeholder="Description" class="form-control" required formControlName="desc" cols="20"
-                    rows="3"></textarea>
+
+          <div class="input-group input-group-sm ">
+
+            <input placeholder="Title" class="form-control" [(ngModel)]="speechData" required formControlName="title"
+                   type="text">
+            <span class="input-group-btn">
+    <button (click)="switchState()" [ngClass]="(etatMic == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMic == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
+
+            <textarea placeholder="Description" class="form-control" required formControlName="desc" cols="20"
+                      rows="5"></textarea>
+
           <div class="mBot5">
-            <p-calendar
-              formControlName="bd"
-              showButtonBar="true"
-              [showIcon]="true"
-              placeholder="Start date"></p-calendar>
+            <p-calendar formControlName="bd" showButtonBar="true" [showIcon]="true" placeholder="Start date"></p-calendar>
           </div>
           <div class="mBot5">
-            <p-calendar
-              formControlName="ed"
-              showButtonBar="true"
-              [showIcon]="true"
-              placeholder="End date"></p-calendar>
+            <p-calendar formControlName="ed" showButtonBar="true" [showIcon]="true" placeholder="End date"></p-calendar>
           </div>
           <input placeholder="Field of work" class="form-control" required formControlName="fow" type="text">
 
@@ -96,22 +127,3 @@
 
   </form>
 </div>
-<div *ngIf="bestCands" class="mTop">
-
-  <ul *ngFor="let r of refugees">
-    <li>{{r.firstname}} {{r.lastName}}</li>
-    <li>{{r.sex}}</li>
-    <li>{{r.dateOfBirth}}</li>
-    <li>{{r.nationality}}</li>
-    <li>{{r.frenchlanguageLevel}}</li>
-    <li>{{r.englishlanguageLevel}}</li>
-    <li>{{r.highestDegree}}</li>
-    <li>{{r.yearsOfExperience}}</li>
-    <li>{{r.email}}</li>
-    <li>{{r.fieldOfWork}}</li>
-    <li>{{r.adress}}</li>
-    <li>{{r.phoneNumber}}</li>
-  </ul>
-
-</div>
-

@@ -149,12 +149,12 @@
   <div class="col-md-5 mTop25" >
     <app-job-offers-list></app-job-offers-list>
   </div>
-  <div class="col-md-7">
+  <div class="col-md-7 mTop25 scrollAndFixedHeight">
     <app-job-offers-detail
       *ngIf="joSelected || etat;else infoText"
       [joInDetail]="joSelected" [etatInDetail]="etat"></app-job-offers-detail>
-    <ng-template #infoText>
-      <strong>Please select a job offer to read more</strong>
+    <ng-template  #infoText>
+      <strong>Please select a job offer to view the details</strong>
     </ng-template>
   </div>
 </div>

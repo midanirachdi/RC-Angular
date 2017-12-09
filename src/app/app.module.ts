@@ -43,6 +43,7 @@ import { SinglepostfullComponent } from './news/singlepostfull/singlepostfull.co
 import { Error404Component } from './template/errors/error404/error404.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {Jsonp, JsonpModule} from "@angular/http";
+import { CandidateComponent } from './template/profile/job-offers/job-offers-detail/candidate/candidate.component';
 
 
 const tabRoute: Routes = [
@@ -86,7 +87,8 @@ const tabRoute: Routes = [
     SearchJobOffersByTitlePipe,
     NewsComponent,
     SinglepostfullComponent,
-    Error404Component
+    Error404Component,
+    CandidateComponent
   ],
   imports: [
     BrowserModule,
