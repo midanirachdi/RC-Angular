@@ -44,6 +44,14 @@ import { Error404Component } from './template/errors/error404/error404.component
 import { NgxPaginationModule } from 'ngx-pagination';
 import {Jsonp, JsonpModule} from "@angular/http";
 import { CandidateComponent } from './template/profile/job-offers/job-offers-detail/candidate/candidate.component';
+import { ManagenewsComponent } from './template/profile/managenews/managenews.component';
+import { AddnewsComponent } from './template/profile/managenews/addnews/addnews.component';
+import {TrumbowygModule} from 'ng2-lazy-trumbowyg';
+import { NoSanitizePipe } from './pipes/no-sanitize.pipe';
+import { HtmlSlicePipe } from './pipes/html-slice.pipe';
+import { HtmlremovehrPipe } from './pipes/htmlremovehr.pipe';
+import { EditnewsComponent } from './template/profile/managenews/editnews/editnews.component';
+
 
 
 const tabRoute: Routes = [
@@ -52,7 +60,9 @@ const tabRoute: Routes = [
     path: "profile", component: ProfileComponent,
     children: [
       {path: "", component: UserInfoComponent, pathMatch: 'full'},
-      {path: "joboffers", component: JobOffersComponent}
+      {path: "joboffers", component: JobOffersComponent},
+      {path: "managenews", component: ManagenewsComponent},
+      {path: "managenews/addnews", component: AddnewsComponent}
     ]
   },
   { path: 'news', component: NewsComponent},
@@ -88,7 +98,13 @@ const tabRoute: Routes = [
     NewsComponent,
     SinglepostfullComponent,
     Error404Component,
-    CandidateComponent
+    CandidateComponent,
+    ManagenewsComponent,
+    AddnewsComponent,
+    NoSanitizePipe,
+    HtmlSlicePipe,
+    HtmlremovehrPipe,
+    EditnewsComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +118,9 @@ const tabRoute: Routes = [
     DialogModule,
     CalendarModule,
     NgxPaginationModule,
-    JsonpModule
+    TrumbowygModule.forRoot({plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0'}), //Optional config : plug-ins and version
+    JsonpModule,
+
   ],
   providers: [
     {

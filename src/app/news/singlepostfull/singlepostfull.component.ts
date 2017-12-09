@@ -13,7 +13,6 @@ import 'rxjs/add/operator/map';
 export class SinglepostfullComponent implements OnInit {
 
   id: number;
-  //private sub: any;
   news: News;
 
 

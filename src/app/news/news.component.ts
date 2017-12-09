@@ -4,6 +4,7 @@ import {NewsService} from "../services/news.services";
 import {Router, ActivatedRoute} from "@angular/router";
 import {LocationService} from "../services/location.service";
 
+
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -11,7 +12,13 @@ import {LocationService} from "../services/location.service";
   providers: [NewsService,LocationService]
 })
 export class NewsComponent implements OnInit {
-  news: News[];
+
+
+
+  onScroll () {
+    console.log('scrolled!!')
+  }
+  news: News[]= new Array();
   p: number = 1;
   countryInfo: string;
   country: any;
@@ -67,10 +74,11 @@ export class NewsComponent implements OnInit {
   }
   getNews(){
     this.newsService.GetAllNews().subscribe(news =>this.news = news);
+
   }
 
   scrollUp(){
     window.scrollTo(0, 0);
   }
-  
+
 }

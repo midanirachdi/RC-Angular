@@ -92,7 +92,7 @@ h1 {
   font-size: 82px;
   font-weight: 700;
   line-height: 85px;
-  color: #fff;
+  color: #333333;
 }
 h2 {
   font-size: 32px;
@@ -2495,6 +2495,14 @@ ul {
   font-weight: 700;
   color: #333333;
   line-height: 28px;
+}
+.divwrap{
+  word-wrap: break-word;
+  overflow:auto;
+  overflow-x: hidden;
+}
+.blog-content img{
+  max-width: 600px;
 }
 .blog-post .blog-content h3 a:hover {
   color: #00bcd4;

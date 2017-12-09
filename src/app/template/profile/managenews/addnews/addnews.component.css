@@ -1,0 +1,23 @@
+.comptitle{
+  display: flex;
+  justify-content: space-between;
+}
+.btt{
+  margin-top: 10px;
+  height: 40px;
+background-color: white;
+}
+.btt:hover{
+  background-color: #00bcd4;
+}
+
+.preview {
+
+  margin-top: 57px;
+  padding: 20px;
+  border: 1px solid;
+  border-color: #d7e0e2;
+
+
+}
+

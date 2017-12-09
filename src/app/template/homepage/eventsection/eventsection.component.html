@@ -1,48 +1,58 @@
 <section class="event-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading mb20 section-padding">
-                        <h2>Upcoming Events</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="event-list">
-                        <article *ngFor="let e of evenements" class="event-item">
-                            <div class="image">
-                                <img src="assets/images/event/1.jpg" class="img-responsive" alt=" ">
-                                <div class="date green-ovelay">
-                                    <span class="day">{{e.dateEvent|date:"EEEE"}}</span>
-                                    <span class="year">{{e.dateEvent|date:"dd"}} {{e.dateEvent|date:"MMMM"}} {{e.dateEvent|date:"y"}}</span>
-                                </div>
-                            </div>
-                            <div class="about-event">
-                                <h3>{{e.name}}</h3>
-                                <div class="meta-describetion">
-                                    <span><i class="ion-clock green"></i>{{e.dateEvent|date:"HH:mm"}}</span>
-                                    <span><i class="ion-ios-location green"></i>{{e.location}}</span>
-                                </div>
-                                <a routerLink='/evenements/{{e.id}}'>Read More</a>
-                            </div>
-                        </article><!-- /.event-item -->
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="become-volienter pdb80">
-                        <div class="text">
-                            <h3> BECOME A<br/>
-                            <span class="green">VOLUNTEER</span></h3>
-                            <p>Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit dum in sagittis. Nulla or narjusto laoreet onse ctetur adipisci adipiscing elitliquam vitae fring.</p>
-                        </div>
-                        <a href="#!" class="green-button button-hover-one">Sign up today</a>
-                    </div>
-                    <div class="statistic">
-                        <h4>Statistics</h4>
-                         <canvas id="myChart" width="400" height="200"></canvas>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading mb20 section-padding">
+                    <h2>Upcoming Events</h2>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="event-list">
+                    <article *ngFor="let e of evenements" class="event-item">
+                        <div class="image">
+                            <img src="assets/images/event/{{e.imagename}}.jpg" class="img-responsive" style="min-height:235px;" alt=" ">
+                            <div class="date green-ovelay">
+                                <span class="day">{{e.dateEvent|date:"EEEE"}}</span>
+                                <span class="year">{{e.dateEvent|date:"dd"}} {{e.dateEvent|date:"MMMM"}} {{e.dateEvent|date:"y"}}</span>
+                            </div>
+                        </div>
+                        <div class="about-event">
+                            <h3>
+                                {{e.name}}
+                            </h3>
+                            <div class="meta-describetion">
+                                <span><i class="ion-clock green"></i>{{e.dateEvent|date:"HH:mm"}}</span>
+                                <span><i class="ion-ios-location green"></i>{{e.location}}</span>
+                                <a href="#">Read More</a>
+                            </div>
+                            
+                            <ul class="sharing-buttons">
+                                <li>
+                                    <a class="facebook" style="color:#4267b2" (click)="faceshare('localhost:4200/evenement-details/'+e.id)"><i class="fa fa-facebook-square"></i>Share on Facebook</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                    <!-- /.event-item -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="become-volienter pdb80">
+                    <div class="text">
+                        <h3> BECOME A<br/>
+                            <span class="green">VOLUNTEER</span></h3>
+                        <p>Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit dum in sagittis. Nulla or narjusto laoreet
+                            onse ctetur adipisci adipiscing elitliquam vitae fring.</p>
+                    </div>
+                    <a href="#!" class="green-button button-hover-one">Sign up today</a>
+                </div>
+                <div class="statistic">
+                    <h4>Statistics</h4>
+                    <canvas id="myChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

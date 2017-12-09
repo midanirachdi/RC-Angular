@@ -22,7 +22,10 @@ export class NewsService {
   httpOptions = {
     headers : new HttpHeaders({ 'Authorization': this.token , 'Content-Type': 'application/json'})
   };
-
+  createAuthorizationHeader(headers: Headers) {
+    headers.append('Authorization', this.token);
+    headers.append('Content-Type', "application/json");
+  }
   constructor(private http: HttpClient,private injector:Injector) {
 
     this.router = this.injector.get(Router);
@@ -31,14 +34,15 @@ export class NewsService {
     this.header.set('Content-Type', 'application/json');
 
 
+
   }
 
 
   ngOnInit() {
 
   }
-  public GetAllNews() : Observable<News[]>{
-    return this.http.get<News[]>(this.url);
+  public GetAllNews() : any{
+    return this.http.get(this.url);
   }
 
   public GetById(id: number) : Observable<any|News>{
@@ -59,10 +63,7 @@ export class NewsService {
 
         return Observable.empty();
       });
-    /*.catch(function e() {
-     console.log("za3ktek");
-     this.router.navigate('/news');
-     })*/
+
   }
 
   public getByCountry(country :string) : Observable<News[]>{
@@ -70,7 +71,13 @@ export class NewsService {
   }
 
   public AddNews(n: News) {
-    return this.http.post(this.url, JSON.stringify(n), this.httpOptions);
+    console.log("za3ktek");
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+
+    return this.http.post(this.url, JSON.stringify(n),  this.httpOptions).subscribe((response: Response) => {
+      return response;
+    });
   }
 
   public updateNews(n: News) {
