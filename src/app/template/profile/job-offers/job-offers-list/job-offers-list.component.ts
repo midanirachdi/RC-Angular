@@ -50,6 +50,7 @@ export class JobOffersListComponent implements OnInit {
         this.jobOfferService.jobOffers.emit(this.jobOffers);
       }
     );
+
     this.jobOfferService.jobOffers.subscribe(
       (joboffers:Joboffer[])=>
         this.jobOffers=joboffers

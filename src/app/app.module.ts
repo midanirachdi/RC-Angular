@@ -51,6 +51,7 @@ import { NoSanitizePipe } from './pipes/no-sanitize.pipe';
 import { HtmlSlicePipe } from './pipes/html-slice.pipe';
 import { HtmlremovehrPipe } from './pipes/htmlremovehr.pipe';
 import { EditnewsComponent } from './template/profile/managenews/editnews/editnews.component';
+import {DateTimePickerModule} from "ng-pick-datetime";
 
 
 
@@ -120,6 +121,7 @@ const tabRoute: Routes = [
     NgxPaginationModule,
     TrumbowygModule.forRoot({plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0'}), //Optional config : plug-ins and version
     JsonpModule,
+    DateTimePickerModule
 
   ],
   providers: [

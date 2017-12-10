@@ -136,23 +136,29 @@ export class JobOffersDetailComponent implements OnInit {
 
         }
     );
-      this.jobofferService.jobOfferAdded.emit(this.jobOfferAdded);
-
-
-
+      this.jobofferService.jobOfferAdded.emit(newJobOffer);
+      this.jobofferService.etat.emit(this.etatInDetail);
     }
     else{
       newJobOffer.id=this.jobOfferFound.id;
+      this.etatInDetail = false;
 
       this.jobofferService.updateJobOffer(newJobOffer).subscribe(
         (jobOfferUpdated:Joboffer)=>{
           this.jobOffers.splice(this.jobOffers.indexOf(newJobOffer),1,jobOfferUpdated);
-          this.jobofferService.jobOffers.emit(this.jobOffers);
-          console.log(jobOfferUpdated);
+
         }
       );
-      this.etatInDetail=false;
 
+//      this.jobofferService.jobOfferAdded.emit(newJobOffer);
+      console.log(newJobOffer);
+      this.jobofferService.getAllJobOffers().subscribe(
+        (joboffers: Joboffer[]) => {
+          this.jobofferService.jobOffers.emit(joboffers);
+        }
+      );
+
+      this.jobofferService.etat.emit(this.etatInDetail);
 
     }
   }

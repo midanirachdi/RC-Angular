@@ -48,7 +48,7 @@ export class JobOffersComponent implements OnInit{
     this.jobOfferService.jobOfferSelected.subscribe(
       (jo: Joboffer) => {
         this.joSelected = jo;
-        this.etat=false;
+        // lol =>this.etat=true;
       }
     );
     this.jobOfferService.jobOfferFound.subscribe(

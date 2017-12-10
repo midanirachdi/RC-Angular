@@ -57,6 +57,7 @@ export class JobOffersItemComponent implements OnInit {
 
         }
       );
+
     this.jobOfferService.jobOfferUpdated.emit(jobOffer);
 
 

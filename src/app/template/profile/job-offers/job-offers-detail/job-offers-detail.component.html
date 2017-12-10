@@ -73,7 +73,7 @@
 </div>
 
 
-<div *ngIf="etatInDetail" class="mTop">
+<div *ngIf="etatInDetail" >
   <h1>{{jobOfferFound === null? "Add ":"Update "}}a job offer</h1>
   <form [formGroup]="jobofferForm"
         (ngSubmit)="onSubmit()">
@@ -99,10 +99,10 @@
                       rows="5"></textarea>
 
           <div class="mBot5">
-            <p-calendar formControlName="bd" showButtonBar="true" [showIcon]="true" placeholder="Start date"></p-calendar>
+            <input class="form-control" formControlName="bd" required type="date">
           </div>
           <div class="mBot5">
-            <p-calendar formControlName="ed" showButtonBar="true" [showIcon]="true" placeholder="End date"></p-calendar>
+            <input class="form-control" formControlName="ed" required type="date">
           </div>
           <input placeholder="Field of work" class="form-control" required formControlName="fow" type="text">
 
@@ -116,10 +116,10 @@
                  type="number" pattern="[0-9]+">
           <input placeholder="Company name" class="form-control" required formControlName="companyN" type="text">
           <input placeholder="Company address" class="form-control" required formControlName="companyA" type="text">
-          <button
+          <button [disabled]="!jobofferForm.valid"
             type="submit"
             class="btn btn-primary">
-            <span><i class="fa fa-check"></i></span> Create
+            <span><i class="fa fa-check"></i></span> {{jobOfferFound === null? "Create":"Update"}}
           </button>
         </div>
       </div>

@@ -12,6 +12,7 @@ export class JobofferService {
   jobOfferUpdated = new EventEmitter<Joboffer>();
   jobOfferDeleted = new EventEmitter<Joboffer>();
   jobOfferAdded = new EventEmitter<Joboffer>();
+  jobOfferHasBeenUpdated = new EventEmitter<Joboffer>();
 
   jobOffers = new EventEmitter<Joboffer[]>();
   jobOffersDetailList = new EventEmitter<Joboffer[]>();
