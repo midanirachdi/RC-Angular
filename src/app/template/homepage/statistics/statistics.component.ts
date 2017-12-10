@@ -13,6 +13,7 @@ export class StatisticsComponent implements OnInit {
   FemaleRefugees: number;
   MaleRefugees: number;
   data: any;
+  options: any;
   ngOnInit() {
     let a,b;
     this.refugeesService.getRefugeesPerGender('homme').subscribe((res: number) => (this.MaleRefugees = res , a = this.MaleRefugees, console.log(this.MaleRefugees),
@@ -23,15 +24,26 @@ export class StatisticsComponent implements OnInit {
               data: [this.MaleRefugees, this.FemaleRefugees],
               backgroundColor: [
                   "#FF6384",
-                  "#36A2EB"
+                  "#00bcd4"
               ],
               hoverBackgroundColor: [
                   "#FF6384",
-                  "#36A2EB"
+                  "#00bcd4"
               ]
           }]
       }
     ) )));
+
+    this.options = {
+      title: {
+          display: true,
+          text: 'Refugees/Gender',
+          fontSize: 16
+      },
+      legend: {
+          position: 'top'
+      }
+  };
   }
 
 }
