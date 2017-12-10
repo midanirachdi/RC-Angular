@@ -15,7 +15,7 @@ import {TestimonialsectionComponent} from './template/homepage/testimonialsectio
 import {FooterComponent} from './template/footer/footer.component';
 import {VolunteersectionComponent} from './template/homepage/volunteersection/volunteersection.component';
 import {RouterModule, Routes} from "@angular/router";
-import {ButtonModule, CalendarModule, DialogModule} from "primeng/primeng";
+import {ButtonModule, CalendarModule, DialogModule, ChartModule} from "primeng/primeng";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JobOffersComponent} from './template/profile/job-offers/job-offers.component';
@@ -51,7 +51,10 @@ import { NoSanitizePipe } from './pipes/no-sanitize.pipe';
 import { HtmlSlicePipe } from './pipes/html-slice.pipe';
 import { HtmlremovehrPipe } from './pipes/htmlremovehr.pipe';
 import { EditnewsComponent } from './template/profile/managenews/editnews/editnews.component';
-import {DateTimePickerModule} from "ng-pick-datetime";
+import { RefugeesComponent } from './template/profile/refugees/refugees.component';
+import { RefugeesService } from './services/refugees.service';
+import { StatisticsComponent } from './template/homepage/statistics/statistics.component';
+import { StatisticsAgeComponent } from './template/homepage/statistics-age/statistics-age.component';
 
 
 
@@ -63,7 +66,8 @@ const tabRoute: Routes = [
       {path: "home", component: UserInfoComponent, pathMatch: 'full'},
       {path: "joboffers", component: JobOffersComponent},
       {path: "managenews", component: ManagenewsComponent},
-      {path: "managenews/addnews", component: AddnewsComponent}
+      {path: "managenews/addnews", component: AddnewsComponent},
+      { path: 'refugees' , component: RefugeesComponent}
     ]
   },
   { path: 'news', component: NewsComponent},
@@ -105,7 +109,10 @@ const tabRoute: Routes = [
     NoSanitizePipe,
     HtmlSlicePipe,
     HtmlremovehrPipe,
-    EditnewsComponent
+    EditnewsComponent,
+    RefugeesComponent,
+    StatisticsComponent,
+    StatisticsAgeComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +128,7 @@ const tabRoute: Routes = [
     NgxPaginationModule,
     TrumbowygModule.forRoot({plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0'}), //Optional config : plug-ins and version
     JsonpModule,
-    DateTimePickerModule
+    ChartModule
 
   ],
   providers: [
@@ -133,7 +140,8 @@ const tabRoute: Routes = [
     AuthService,
     UserService,
     JobofferService,
-    SpeechService
+    SpeechService,
+    RefugeesService
 
   ],
   bootstrap: [AppComponent]

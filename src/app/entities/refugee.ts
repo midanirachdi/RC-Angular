@@ -5,7 +5,7 @@ export class Refugee {
               public firstname?: string,
               public lastName?: string,
               public sex?: string,
-              public dateOfBirth?: string,
+              public dateOfBirth?: Date,
               public nationality?: string,
               public frenchlanguageLevel?: string,
               public englishlanguageLevel?: string,
@@ -16,6 +16,6 @@ export class Refugee {
               public adress?: string,
               public phoneNumber?: number,
               public fiche?: string,
-              public id?:number) {
+              public id?: number) {
   }
 }
