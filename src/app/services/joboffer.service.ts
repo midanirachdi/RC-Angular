@@ -8,10 +8,18 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class JobofferService {
   jobOfferSelected = new EventEmitter<Joboffer>();
+  jobOfferFound = new EventEmitter<Joboffer>();
+  jobOfferUpdated = new EventEmitter<Joboffer>();
+  jobOfferDeleted = new EventEmitter<Joboffer>();
+  jobOfferAdded = new EventEmitter<Joboffer>();
+  jobOfferHasBeenUpdated = new EventEmitter<Joboffer>();
+
+  jobOffers = new EventEmitter<Joboffer[]>();
+  jobOffersDetailList = new EventEmitter<Joboffer[]>();
   etat = new EventEmitter<boolean>();
   bestCands = new EventEmitter<boolean>();
 
-  jobOffers =new EventEmitter<Joboffer[]>();
+
 
   url = "http://localhost:18080/refugeesCamp-web/api/joboffers";
   urlUserService = "http://localhost:18080/refugeesCamp-web/api/users";

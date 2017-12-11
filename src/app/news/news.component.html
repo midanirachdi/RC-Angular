@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="banner-title">
-          <h1>News</h1>
+          <h1 class="sectitle">News</h1>
 
           <h5 *ngIf="countryInfo!=null" class="white">{{countryInfo}}</h5>
           <ul>
@@ -46,11 +46,11 @@
                                 </span>
               <a href="#" class="comment pull-right"><i class="fa fa-commenting-o" aria-hidden="true"></i>245</a>
             </div>
-            <div class="blog-content">
+            <div class="blog-content divwrap">
               <h3><a href="#">{{n.title}}</a></h3>
-              <p>
-                {{n.content}}
-              </p>
+              <div [innerHTML]="n.content | htmlSlice | noSanitize">
+
+              </div>
               <a [routerLink]="['/news', n.id]"  class="green-button button-hover-one">Read More</a>
             </div>
           </div>

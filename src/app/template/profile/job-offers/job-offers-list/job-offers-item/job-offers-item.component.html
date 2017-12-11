@@ -1,10 +1,10 @@
-<a (click)="onSelected()" class="list-group-item clearfix mBot5">
-
-
+<a   class="list-group-item clearfix mBot5">
   <div class="row mNull mBot">
     <div *ngIf="role==='DistrictChef'" class="pull-right">
       <div  class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-warning">
+        <button type="button" (click)="onSelected()" class="btn btn-info">
+          <span><i class="fa fa-info"></i></span></button>
+        <button type="button" (click)="onUpdate(joboffer)" class="btn btn-warning">
           <span><i class="fa fa-pencil"></i></span></button>
         <button (click)="onDelete(joboffer)" type="button" class="btn btn-danger">
           <span><i class="fa fa-trash"></i></span></button>

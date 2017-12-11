@@ -16,15 +16,16 @@
                                     Author :  <a href="#">{{news?.author}}</a>
                                 </span>
               <span class="post-categories">
-                                    Location : <a href="#">{{news?.location}},</a>
+                                    Location : <a href="#">{{news?.location}}</a>
                                 </span>
               <a href="#" class="comment pull-right"><i class="fa fa-commenting-o" aria-hidden="true"></i>245</a>
             </div>
-            <div class="blog-content">
+            <div class="blog-content divwrap">
               <h3><a href="#">{{news?.title}}</a></h3>
-              <p>
-                {{news?.content}}
-              </p>
+              <hr>
+              <div class="aaaa" [innerHTML]="news?.content | htmlremovehr | noSanitize">
+
+              </div>
 
               <div class="row">
                 <div class="col-sm-5">

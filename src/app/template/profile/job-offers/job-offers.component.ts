@@ -14,7 +14,7 @@ import {DatePipe} from "@angular/common";
 })
 export class JobOffersComponent implements OnInit{
 
-  joSelected: Joboffer;
+  joSelected: Joboffer = null;
   jobOffers: Joboffer[];
   refugees:Refugee[];
   jobOfferFound: Joboffer = null;
@@ -48,12 +48,17 @@ export class JobOffersComponent implements OnInit{
     this.jobOfferService.jobOfferSelected.subscribe(
       (jo: Joboffer) => {
         this.joSelected = jo;
-        if (this.joSelected !=null)
-          this.etat=false;
+        // lol =>this.etat=true;
       }
     );
+    this.jobOfferService.jobOfferFound.subscribe(
+      ()=>this.jobOfferService.jobOfferSelected.subscribe(
+        (jo:Joboffer)=>this.joSelected=null
+      )
+    );
       this.jobOfferService.etat.subscribe(
-      (etat:boolean)=>{this.etat=etat;
+      (etat:boolean)=>{
+        this.etat=etat;
         if(this.etat==true)
           this.joSelected=null}
     );
@@ -150,8 +155,6 @@ export class JobOffersComponent implements OnInit{
           'fow':this.jobOfferFound.fieldOfWork,
           'salaryE':this.jobOfferFound.salaryEstimate
         });
-
-
       }
     );
 

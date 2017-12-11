@@ -14,8 +14,10 @@ import {BlogsectionComponent} from './template/homepage/blogsection/blogsection.
 import {TestimonialsectionComponent} from './template/homepage/testimonialsection/testimonialsection.component';
 import {FooterComponent} from './template/footer/footer.component';
 import {VolunteersectionComponent} from './template/homepage/volunteersection/volunteersection.component';
-import {RouterModule, Routes, CanActivate } from "@angular/router";
-import {ButtonModule, CalendarModule, DialogModule} from "primeng/primeng";
+
+import {RouterModule, Routes,CanActivate} from "@angular/router";
+import {ButtonModule, CalendarModule, DialogModule, ChartModule} from "primeng/primeng";
+
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JobOffersComponent} from './template/profile/job-offers/job-offers.component';
@@ -43,15 +45,35 @@ import { SinglepostfullComponent } from './news/singlepostfull/singlepostfull.co
 import { Error404Component } from './template/errors/error404/error404.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {Jsonp, JsonpModule} from "@angular/http";
+
 import {AuthGuardService as AuthGuard} from './services/AuthGuardService';
+import { CandidateComponent } from './template/profile/job-offers/job-offers-detail/candidate/candidate.component';
+import { ManagenewsComponent } from './template/profile/managenews/managenews.component';
+import { AddnewsComponent } from './template/profile/managenews/addnews/addnews.component';
+import {TrumbowygModule} from 'ng2-lazy-trumbowyg';
+import { NoSanitizePipe } from './pipes/no-sanitize.pipe';
+import { HtmlSlicePipe } from './pipes/html-slice.pipe';
+import { HtmlremovehrPipe } from './pipes/htmlremovehr.pipe';
+import { EditnewsComponent } from './template/profile/managenews/editnews/editnews.component';
+import { RefugeesComponent } from './template/profile/refugees/refugees.component';
+import { RefugeesService } from './services/refugees.service';
+import { StatisticsComponent } from './template/homepage/statistics/statistics.component';
+import { StatisticsAgeComponent } from './template/homepage/statistics-age/statistics-age.component';
+
+
+
 
 const tabRoute: Routes = [
   {path: "", component: HomepageComponent, pathMatch: 'full'},
+  {path: "home", component: HomepageComponent, pathMatch: 'full'},
   {
     path: "profile", component: ProfileComponent,canActivate: [AuthGuard],
     children: [
-      {path: "", component: UserInfoComponent, pathMatch: 'full'},
-      {path: "joboffers", component: JobOffersComponent}
+      {path: "home", component: UserInfoComponent, pathMatch: 'full'},
+      {path: "joboffers", component: JobOffersComponent},
+      {path: "managenews", component: ManagenewsComponent},
+      {path: "managenews/addnews", component: AddnewsComponent},
+      { path: 'refugees' , component: RefugeesComponent}
     ]
   },
   { path: 'news', component: NewsComponent},
@@ -86,7 +108,17 @@ const tabRoute: Routes = [
     SearchJobOffersByTitlePipe,
     NewsComponent,
     SinglepostfullComponent,
-    Error404Component
+    Error404Component,
+    CandidateComponent,
+    ManagenewsComponent,
+    AddnewsComponent,
+    NoSanitizePipe,
+    HtmlSlicePipe,
+    HtmlremovehrPipe,
+    EditnewsComponent,
+    RefugeesComponent,
+    StatisticsComponent,
+    StatisticsAgeComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +132,10 @@ const tabRoute: Routes = [
     DialogModule,
     CalendarModule,
     NgxPaginationModule,
-    JsonpModule
+    TrumbowygModule.forRoot({plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0'}), //Optional config : plug-ins and version
+    JsonpModule,
+    ChartModule
+
   ],
   providers: [
     {
@@ -112,7 +147,9 @@ const tabRoute: Routes = [
     UserService,
     JobofferService,
     SpeechService,
-    AuthGuard
+    AuthGuard,
+    RefugeesService
+
 
   ],
   bootstrap: [AppComponent]

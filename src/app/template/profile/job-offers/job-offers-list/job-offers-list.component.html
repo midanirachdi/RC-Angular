@@ -8,11 +8,18 @@
     </div>
   </div>
 </div>
-<div class="row scrollAndFixedHeight" >
+<div class="row scrollAndFixedHeight" *ngIf="jobOffers;else infoText">
   <div class="col-xs-12">
     <app-job-offers-item
       *ngFor="let jobofferEl of jobOffers |searchJobOffersByTitle:titleToSearch"
       [joboffer]="jobofferEl"></app-job-offers-item>
   </div>
 </div>
+<ng-template  #infoText>
+  <div class="row scrollAndFixedHeight">
+    <div class="col-xs-12">
+      <strong>Please add a job offer </strong>
+    </div>
+  </div>
+</ng-template>
 
