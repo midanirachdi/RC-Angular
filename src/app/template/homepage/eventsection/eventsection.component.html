@@ -25,7 +25,7 @@
                             <div class="meta-describetion">
                                 <span><i class="ion-clock green"></i>{{e.dateEvent|date:"HH:mm"}}</span>
                                 <span><i class="ion-ios-location green"></i>{{e.location}}</span>
-                                <a href="#">Read More</a>
+                                <a [routerLink]="['evenement-details',e.id]">Read More</a>
                             </div>
                             
                             <ul class="sharing-buttons">

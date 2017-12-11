@@ -19,7 +19,10 @@ export class RefugeesComponent implements OnInit {
   sexe: SelectItem[];
   FemaleRefugees: number;
   MaleRefugees: number;
+  idCurrentRefugee: number;
+  name: string;
   refugees: Refugee[]= [];
+  filtredRefugees: Refugee[]= [];
   refugee: Refugee = { 'firstname': null , 'lastName': null ,
                        'sex': null, 'dateOfBirth': null , 'nationality': null,
                        'frenchlanguageLevel': null , 'englishlanguageLevel': null,
@@ -42,7 +45,7 @@ export class RefugeesComponent implements OnInit {
 
   ngOnInit() {
     let a,b;
-    this.refugeesService.GetAllRefugees().subscribe((resp) => {console.log(resp); this.refugees = resp; } );
+    this.refugeesService.GetAllRefugees().subscribe((resp) => {console.log(resp); this.refugees = resp; this.filtredRefugees = resp; } );
     this.refugeesService.getRefugeesPerGender('homme').subscribe((res: number) => (this.MaleRefugees = res , a = this.MaleRefugees, console.log(this.MaleRefugees),
     this.refugeesService.getRefugeesPerGender('femme').subscribe((r: number) => (this.FemaleRefugees = r , console.log(this.FemaleRefugees),   this.data = {
       labels: ['Male', 'Female'],
@@ -87,6 +90,7 @@ export class RefugeesComponent implements OnInit {
 
   showDialog(r: Refugee) {
     this.display = true;
+    this.idCurrentRefugee = r.id;
     this.RefugeeAddForm.setValue({
       'firstname' : r.firstname,
       'lastName' : r.lastName,
@@ -99,8 +103,20 @@ export class RefugeesComponent implements OnInit {
 }
 
   DoUpdateRefugee(r: Refugee) {
-    this.refugeesService.updateRefugee(r).subscribe();
+    this.refugee.id = this.idCurrentRefugee;
+    this.refugee.firstname = this.RefugeeAddForm.value.firstname;
+    this.refugee.lastName = this.RefugeeAddForm.value.lastName;
+    this.refugee.sex = this.RefugeeAddForm.value.sex;
+    this.refugee.dateOfBirth = this.RefugeeAddForm.value.dateOfBirth;
+    this.refugee.phoneNumber = this.RefugeeAddForm.value.phoneNumber;
+    this.refugee.nationality = this.RefugeeAddForm.value.nationality;
+    this.refugee.email = this.RefugeeAddForm.value.email;
+    this.refugeesService.updateRefugee(this.refugee).subscribe();
     this.refugeesService.GetAllRefugees().subscribe((resp) => {this.refugees = resp; } );
+  }
+
+  findRefugeesByName(event: any){
+    this.filtredRefugees = this.refugees.filter(x=>x.firstname.toUpperCase().startsWith(event.target.value.toUpperCase()));
   }
 
 }
