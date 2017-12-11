@@ -14,7 +14,7 @@ import {BlogsectionComponent} from './template/homepage/blogsection/blogsection.
 import {TestimonialsectionComponent} from './template/homepage/testimonialsection/testimonialsection.component';
 import {FooterComponent} from './template/footer/footer.component';
 import {VolunteersectionComponent} from './template/homepage/volunteersection/volunteersection.component';
-import {RouterModule, Routes} from "@angular/router";
+import {RouterModule, Routes, CanActivate } from "@angular/router";
 import {ButtonModule, CalendarModule, DialogModule} from "primeng/primeng";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -43,12 +43,12 @@ import { SinglepostfullComponent } from './news/singlepostfull/singlepostfull.co
 import { Error404Component } from './template/errors/error404/error404.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {Jsonp, JsonpModule} from "@angular/http";
-
+import {AuthGuardService as AuthGuard} from './services/AuthGuardService';
 
 const tabRoute: Routes = [
   {path: "", component: HomepageComponent, pathMatch: 'full'},
   {
-    path: "profile", component: ProfileComponent,
+    path: "profile", component: ProfileComponent,canActivate: [AuthGuard],
     children: [
       {path: "", component: UserInfoComponent, pathMatch: 'full'},
       {path: "joboffers", component: JobOffersComponent}
@@ -111,7 +111,8 @@ const tabRoute: Routes = [
     AuthService,
     UserService,
     JobofferService,
-    SpeechService
+    SpeechService,
+    AuthGuard
 
   ],
   bootstrap: [AppComponent]

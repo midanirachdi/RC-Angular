@@ -4,6 +4,7 @@ import { HttpClient,HttpHeaders,HttpResponse} from '@angular/common/http';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { Router } from '@angular/router';
 
 import { JwtHelper } from 'angular2-jwt';
 import {LOGIN_URL} from './java.urls';
@@ -25,8 +26,9 @@ export class AuthService implements OnDestroy {
   userLogged:BehaviorSubject <boolean>=new BehaviorSubject(false);
   user:BehaviorSubject<User>=new BehaviorSubject<User>(null);
   subscr:Subscription;
+  lg:boolean=false;
 
-  constructor(public http: HttpClient,private userService:UserService,private fb: FacebookService) {
+  constructor(public http: HttpClient,private userService:UserService,private fb: FacebookService, public router: Router) {
     let initParams: InitParams = {
       appId: '170197633567661',
       xfbml: true,
@@ -70,6 +72,7 @@ export class AuthService implements OnDestroy {
               let temp=JSON.stringify(u);
               let myuser:User=UserMapper(temp);
               this.user.next(myuser);
+              this.lg=true;
             });
             
 
@@ -104,6 +107,7 @@ export class AuthService implements OnDestroy {
           console.log("facebook")
           console.log(myuser);
           this.user.next(myuser);
+          this.lg=true;
         });
      })
                   })
@@ -135,6 +139,7 @@ export class AuthService implements OnDestroy {
                 let temp=JSON.stringify(u);
                 let myuser:User=UserMapper(temp);
                 this.user.next(myuser);
+                this.lg=true;
                 });
         })
 
@@ -144,10 +149,17 @@ export class AuthService implements OnDestroy {
   }
 
 
+  public isAuthenticated():boolean{
+   return this.lg;
+  }
+
   public LogOut():void{
     this.user.next(null);
     this.userLogged.next(false);
     localStorage.clear();
+    this.lg=false;
+    console.log('dec')
+    this.router.navigate(['']);
   }
 
 }

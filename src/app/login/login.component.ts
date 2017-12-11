@@ -31,8 +31,9 @@ export class LoginComponent implements OnInit,OnDestroy {
    }
 
   ngOnInit() {
-    this.subscription=this.authService.userLogged.subscribe(isConnected=>
-      this.connected=isConnected
+    this.subscription=this.authService.userLogged.subscribe(isConnected=>{
+      this.connected=isConnected;
+      console.log(this.connected);}
     );
 
     this.userSub=this.authService.user.subscribe((u:User)=>{this.user=u;
