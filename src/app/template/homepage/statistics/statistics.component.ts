@@ -7,6 +7,8 @@ import { RefugeesService } from '../../../services/refugees.service';
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent implements OnInit {
+  height: string;
+  width: string;
 
   constructor(private refugeesService: RefugeesService) { }
 
@@ -18,7 +20,7 @@ export class StatisticsComponent implements OnInit {
     let a,b;
     this.refugeesService.getRefugeesPerGender('homme').subscribe((res: number) => (this.MaleRefugees = res , a = this.MaleRefugees, console.log(this.MaleRefugees),
     this.refugeesService.getRefugeesPerGender('femme').subscribe((r: number) => (this.FemaleRefugees = r , console.log(this.FemaleRefugees),   this.data = {
-      labels: ['Male', 'Female'],
+      labels: ['Males', 'Females'],
       datasets: [
           {
               data: [this.MaleRefugees, this.FemaleRefugees],
@@ -44,6 +46,8 @@ export class StatisticsComponent implements OnInit {
           position: 'top'
       }
   };
+  this.width = '900';
+  this.height = '280';
   }
 
 }

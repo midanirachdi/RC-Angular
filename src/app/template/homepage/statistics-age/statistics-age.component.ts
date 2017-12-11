@@ -10,13 +10,15 @@ export class StatisticsAgeComponent implements OnInit {
   bebe: number; enfant: number; ado: number; adulte: number; agee: number;
   data: any;
   options: any;
+  width: string;
+  height: string;
   constructor(private refugeesService: RefugeesService) { }
 
   ngOnInit() {
     // tslint:disable-next-line:max-line-length
     this.refugeesService.getRefugeesPerAge().subscribe((res) => ( console.log(res), this.bebe = res[0], this.enfant = res[1], this.ado = res[2], this.adulte = res[3], this.agee = res[4],
       this.data = {
-        labels: ['bebe', 'enfant', 'ado', 'adulte', 'agee'],
+        labels: ['Babies', 'Children', 'Teenagers', 'Adults', 'Ageds'],
         datasets: [
             {
                 data: [
@@ -40,6 +42,7 @@ export class StatisticsAgeComponent implements OnInit {
                     '#322B4E'
                 ]
             }]
+
   }));
   this.options = {
     title: {
@@ -51,6 +54,9 @@ export class StatisticsAgeComponent implements OnInit {
         position: 'top'
     }
 };
+
+  this.width = '900';
+  this.height = '280';
 }
 
 }
