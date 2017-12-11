@@ -13,45 +13,56 @@ import {SpeechService} from "../../../../services/speech.service";
   selector: 'app-job-offers-detail',
   templateUrl: './job-offers-detail.component.html',
   styleUrls: ['./job-offers-detail.component.css'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
 export class JobOffersDetailComponent implements OnInit {
-  @Input() etatInDetail:boolean =false;
-  @Input() joInDetail: Joboffer;
-  jobOffers:Joboffer[];
-  jobOfferAdded:Joboffer;
-  bestCands=false;
-  etatMic=false;
-  speechData: string;
 
 
-  userSub:Subscription;
-  user:User;
-  role:string;
+  @Input() etatInDetail: boolean = false;
+  @Input() joInDetail: Joboffer=null;
+  jobOffers: Joboffer[];
+  jobOfferAdded: Joboffer;
+  bestCands = false;
+
+  //mic states
+  etatMicTitle = false;
+  etatMicDesc = false;
+  etatMicFow = false;
+  etatMicSalaryE = false;
+  etatMicContactN = false;
+  etatMicContactE = false;
+  etatMicContactNumber = false;
+  etatMicCompanyN = false;
+  etatMicCompanyA = false;
+
+  dynamicState: string;
+  userSub: Subscription;
+  user: User;
+  role: string;
 
 
-  refugees:Refugee[];
+  refugees: Refugee[];
 
   jobOfferFound: Joboffer = null;
   jobofferForm = new FormGroup({
-    title: new FormControl('', Validators.required),
-    contactN: new FormControl('', Validators.required),
-    companyN: new FormControl('', Validators.required),
-    companyA: new FormControl('', Validators.required),
-    contactE: new FormControl('', Validators.required),
-    desc: new FormControl('', Validators.required),
-    bd: new FormControl('', Validators.required),
-    ed: new FormControl('', Validators.required),
-    contactNumber: new FormControl('', Validators.required),
-    fow: new FormControl('', Validators.required),
-    salaryE: new FormControl('', Validators.required)
+    'title': new FormControl('', Validators.required),
+    'contactN': new FormControl('', Validators.required),
+    'companyN': new FormControl('', Validators.required),
+    'companyA': new FormControl('', Validators.required),
+    'contactE': new FormControl('', Validators.required),
+    'desc': new FormControl('', Validators.required),
+    'bd': new FormControl('', Validators.required),
+    'ed': new FormControl('', Validators.required),
+    'contactNumber': new FormControl('', Validators.required),
+    'fow': new FormControl('', Validators.required),
+    'salaryE': new FormControl('', Validators.required)
   });
 
-  constructor(
-    private jobofferService:JobofferService,
-    private datePipe: DatePipe,
-    private authService:AuthService,
-    private speechService:SpeechService) { }
+  constructor(private jobofferService: JobofferService,
+              private datePipe: DatePipe,
+              private authService: AuthService,
+              private speechService: SpeechService) {
+  }
 
   ngOnInit() {
     this.jobofferService.bestCands.subscribe(
@@ -60,53 +71,162 @@ export class JobOffersDetailComponent implements OnInit {
       }
     );
     this.jobofferService.jobOfferFound.subscribe(
-      (jobOfferFound:Joboffer)=>
-      {
-        this.jobOfferFound=jobOfferFound;
+      (jobOfferFound: Joboffer) => {
+        this.jobOfferFound = jobOfferFound;
         this.jobofferForm.setValue({
           'title': this.jobOfferFound.title,
           'contactN': this.jobOfferFound.contactName,
           'companyN': this.jobOfferFound.companyName,
-          'companyA':this.jobOfferFound.companyAdress,
-          'contactE':this.jobOfferFound.contactEmail,
-          'desc':this.jobOfferFound.description,
-          'bd':this.jobOfferFound.begindate,
-          'ed':this.jobOfferFound.enddate,
-          'contactNumber':this.jobOfferFound.contactnumber,
-          'fow':this.jobOfferFound.fieldOfWork,
-          'salaryE':this.jobOfferFound.salaryEstimate
+          'companyA': this.jobOfferFound.companyAdress,
+          'contactE': this.jobOfferFound.contactEmail,
+          'desc': this.jobOfferFound.description,
+          'bd': this.jobOfferFound.begindate,
+          'ed': this.jobOfferFound.enddate,
+          'contactNumber': this.jobOfferFound.contactnumber,
+          'fow': this.jobOfferFound.fieldOfWork,
+          'salaryE': this.jobOfferFound.salaryEstimate
         });
       }
     );
 
     this.jobofferService.etat.subscribe(
-      (etatUpdate:boolean)=> {
-        this.etatInDetail=etatUpdate;
+      (etatUpdate: boolean) => {
+        this.etatInDetail = etatUpdate;
 
       }
     );
 
     this.jobofferService.jobOffers.subscribe(
-      (joboffers:Joboffer[])=>this.jobOffers=joboffers
+      (joboffers: Joboffer[]) => this.jobOffers = joboffers
     );
-    this.userSub=this.authService.user.subscribe((u)=>{
-      this.user=u;
+    this.userSub = this.authService.user.subscribe((u) => {
+      this.user = u;
     });
-    this.role=localStorage.getItem('role');
+    this.role = localStorage.getItem('role');
   }
-  switchState(){
-    this.etatMic=!this.etatMic;
-    if(this.etatMic==true){
-    this.speechService.record().subscribe(
-      (value)=>{
-        this.speechData = value;
-        console.log(value);
-      }
-    );
+
+  switchStateTitle() {
+    this.etatMicTitle = !this.etatMicTitle;
+    if (this.etatMicTitle == true) {
+      this.speechService.record().subscribe(
+        (value) => {
+          this.jobofferForm.patchValue({title: value});
+          console.log();
+        }
+      );
     }
-    else{
+    else {
       this.speechService.DestroySpeechObject();
-      this.etatMic=false;
+      this.etatMicTitle = false;
+    }
+  }
+
+  switchStateDesc() {
+    this.etatMicDesc = !this.etatMicDesc;
+    if (this.etatMicDesc == true) {
+      this.speechService.record().subscribe(
+        (value) => {
+          this.jobofferForm.patchValue({desc: value});
+          console.log();
+        }
+      );
+    }
+    else {
+      this.speechService.DestroySpeechObject();
+      this.etatMicDesc = false;
+    }
+  }
+
+  switchStateFow() {
+    this.etatMicFow = !this.etatMicFow;
+    if (this.etatMicFow == true) {
+      this.speechService.record().subscribe(
+        (value) => {
+          this.jobofferForm.patchValue({fow: value});
+        }
+      );
+    }
+    else {
+      this.speechService.DestroySpeechObject();
+      this.etatMicFow = false;
+    }
+  }
+
+  switchStateSalaryE() {
+    this.etatMicSalaryE = !this.etatMicSalaryE;
+    if (this.etatMicSalaryE == true) {
+      this.speechService.record().subscribe(
+        (value) => {
+          this.jobofferForm.patchValue({salaryE: +value});
+        }
+      );
+    }
+    else {
+      this.speechService.DestroySpeechObject();
+      this.etatMicSalaryE = false;
+    }
+  }
+
+  switchStateContactN() {
+    this.etatMicContactN = !this.etatMicContactN;
+    if (this.etatMicContactN == true) {
+      this.speechService.record().subscribe(
+        (value) => {
+          this.jobofferForm.patchValue({contactN: value});
+        }
+      );
+    }
+    else {
+      this.speechService.DestroySpeechObject();
+      this.etatMicContactN = false;
+    }
+  }
+
+  switchStateContactE() {
+    this.etatMicContactE = !this.etatMicContactE;
+    if (this.etatMicContactE == true) {
+      this.speechService.record().subscribe(
+        (value) => {
+          if (value.indexOf('at') !== -1) {
+            value = value.replace('at', '@');
+          }
+          this.jobofferForm.patchValue({contactE: value});
+        }
+      );
+    }
+    else {
+      this.speechService.DestroySpeechObject();
+      this.etatMicContactE = false;
+    }
+  }
+
+  switchStateContactNumber() {
+    this.etatMicContactNumber = !this.etatMicContactNumber;
+    if (this.etatMicContactNumber == true) {
+      this.speechService.record().subscribe(
+        (value) => {
+          this.jobofferForm.patchValue({contactNumber: +value});
+        }
+      );
+    }
+    else {
+      this.speechService.DestroySpeechObject();
+      this.etatMicContactNumber = false;
+    }
+  }
+
+  switchStateCompanyN() {
+    this.etatMicCompanyN = !this.etatMicCompanyN;
+    if (this.etatMicCompanyN == true) {
+      this.speechService.record().subscribe(
+        (value) => {
+          this.jobofferForm.patchValue({etatMicCompanyN: value});
+        }
+      );
+    }
+    else {
+      this.speechService.DestroySpeechObject();
+      this.etatMicCompanyN = false;
     }
   }
 
@@ -125,27 +245,27 @@ export class JobOffersDetailComponent implements OnInit {
       this.jobofferForm.value.contactN,
       this.jobofferForm.value.title);
 
-    if(this.jobOfferFound === null){
+    if (this.jobOfferFound === null) {
       console.log('Adding a job offer');
       this.etatInDetail = false;
 
       this.jobofferService.addJobOffer(newJobOffer).subscribe(
-        (jobOfferAdded:Joboffer)=>{
+        (jobOfferAdded: Joboffer) => {
           this.jobofferService.jobOffersDetailList.emit(this.jobOffers);
-          this.jobOfferAdded=jobOfferAdded;
+          this.jobOfferAdded = jobOfferAdded;
 
         }
-    );
+      );
       this.jobofferService.jobOfferAdded.emit(newJobOffer);
       this.jobofferService.etat.emit(this.etatInDetail);
     }
-    else{
-      newJobOffer.id=this.jobOfferFound.id;
+    else {
+      newJobOffer.id = this.jobOfferFound.id;
       this.etatInDetail = false;
 
       this.jobofferService.updateJobOffer(newJobOffer).subscribe(
-        (jobOfferUpdated:Joboffer)=>{
-          this.jobOffers.splice(this.jobOffers.indexOf(newJobOffer),1,jobOfferUpdated);
+        (jobOfferUpdated: Joboffer) => {
+          this.jobOffers.splice(this.jobOffers.indexOf(newJobOffer), 1, jobOfferUpdated);
 
         }
       );
@@ -162,13 +282,13 @@ export class JobOffersDetailComponent implements OnInit {
 
     }
   }
-  getBestCandsEmail(joboffer_id:number){
 
+  getBestCandsEmail(joboffer_id: number) {
 
 
     this.jobofferService.getBestCandidatesAndEmailThem(joboffer_id).subscribe(
-      (refugees:Refugee[])=>{
-        this.refugees=refugees
+      (refugees: Refugee[]) => {
+        this.refugees = refugees
       }
     );
     this.bestCands = !this.bestCands;
