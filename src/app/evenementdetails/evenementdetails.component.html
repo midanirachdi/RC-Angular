@@ -28,11 +28,13 @@
                         <img src="assets/images/event/{{evenement?.imagename}}.jpg" class="img-responsive" alt="event image">
                     </div>
                     <div class="event-header-inner">
+                        <h4>{{evenement?.name}}</h4>
                         <ul class="meta">
                             <li class="bt-location"><i class="fa fa-map-marker"></i>{{evenement?.location}} <span>Africa</span></li>
                             <li class="bt-location"><i class="fa fa-calendar-o"></i><span>{{evenement?.dateEvent|date:"dd"}} {{evenement?.dateEvent|date:"MMMM"}}, {{evenement?.dateEvent|date:"y"}}</span></li>
                         </ul>
-                        <h4>Clothes For Everyone</h4>
+                        <p-rating [(ngModel)]="val3" [cancel]="false" (onRate)="handleRate($event)"></p-rating>
+                        <h5>Rate : {{note}} </h5>
                     </div>
                     <div class="event-contet">
                         <p>{{evenement?.description}}</p>

@@ -15,7 +15,7 @@ import { TestimonialsectionComponent } from './template/homepage/testimonialsect
 import { FooterComponent } from './template/footer/footer.component';
 import { VolunteersectionComponent } from './template/homepage/volunteersection/volunteersection.component';
 import { RouterModule, Routes } from "@angular/router";
-import { ButtonModule, CalendarModule, DialogModule, ChartModule } from "primeng/primeng";
+import { ButtonModule, CalendarModule, DialogModule, ChartModule , RatingModule } from "primeng/primeng";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { JobOffersComponent } from './template/profile/job-offers/job-offers.component';
@@ -57,7 +57,6 @@ import { StatisticsComponent } from './template/homepage/statistics/statistics.c
 import { StatisticsAgeComponent } from './template/homepage/statistics-age/statistics-age.component';
 import { EvenementlistingComponent } from './evenementlisting/evenementlisting.component';
 import { EvenementdetailsComponent } from './evenementdetails/evenementdetails.component';
-
 
 
 const tabRoute: Routes = [
@@ -118,7 +117,8 @@ const tabRoute: Routes = [
     StatisticsComponent,
     StatisticsAgeComponent,
     EvenementlistingComponent,
-    EvenementdetailsComponent
+    EvenementdetailsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -134,7 +134,8 @@ const tabRoute: Routes = [
     NgxPaginationModule,
     TrumbowygModule.forRoot({ plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0' }), //Optional config : plug-ins and version
     JsonpModule,
-    ChartModule
+    ChartModule,
+    RatingModule,
 
   ],
   providers: [
