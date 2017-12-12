@@ -10,6 +10,12 @@
           <span><i class="fa fa-trash"></i></span></button>
       </div>
     </div>
+    <div *ngIf="role==='CampChef'" class="pull-right">
+      <div  class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" (click)="onSelected()" class="btn btn-info">
+          <span><i class="fa fa-info"></i></span></button>
+      </div>
+    </div>
     <h3 class="list-group-item-heading">
       {{ joboffer.title }}
     </h3>

@@ -43,7 +43,6 @@ import { SinglepostfullComponent } from './news/singlepostfull/singlepostfull.co
 import { Error404Component } from './template/errors/error404/error404.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Jsonp, JsonpModule } from "@angular/http";
-import { CandidateComponent } from './template/profile/job-offers/job-offers-detail/candidate/candidate.component';
 import { ManagenewsComponent } from './template/profile/managenews/managenews.component';
 import { AddnewsComponent } from './template/profile/managenews/addnews/addnews.component';
 import { TrumbowygModule } from 'ng2-lazy-trumbowyg';
@@ -106,7 +105,6 @@ const tabRoute: Routes = [
     NewsComponent,
     SinglepostfullComponent,
     Error404Component,
-    CandidateComponent,
     ManagenewsComponent,
     AddnewsComponent,
     NoSanitizePipe,
