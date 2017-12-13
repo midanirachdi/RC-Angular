@@ -1,3 +1,4 @@
+import { EvenementService } from './services/evenement.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -52,10 +53,12 @@ import { HtmlremovehrPipe } from './pipes/htmlremovehr.pipe';
 import { EditnewsComponent } from './template/profile/managenews/editnews/editnews.component';
 import { RefugeesComponent } from './template/profile/refugees/refugees.component';
 import { RefugeesService } from './services/refugees.service';
+import { DonationService } from './services/donation.service';
 import { StatisticsComponent } from './template/homepage/statistics/statistics.component';
 import { StatisticsAgeComponent } from './template/homepage/statistics-age/statistics-age.component';
 import { EvenementlistingComponent } from './evenementlisting/evenementlisting.component';
 import { EvenementdetailsComponent } from './evenementdetails/evenementdetails.component';
+import { DonationComponent } from './donation/donation.component';
 
 
 const tabRoute: Routes = [
@@ -72,6 +75,7 @@ const tabRoute: Routes = [
   },
   { path: 'news', component: NewsComponent },
   {path: 'evenements', component: EvenementlistingComponent},
+  {path: 'donate', component: DonationComponent},
   {path: 'evenement-details/:id', component: EvenementdetailsComponent},
   { path: 'news/:id', component: SinglepostfullComponent },
   { path: 'error404', component: Error404Component }
@@ -116,6 +120,7 @@ const tabRoute: Routes = [
     StatisticsAgeComponent,
     EvenementlistingComponent,
     EvenementdetailsComponent,
+    DonationComponent,
     
   ],
   imports: [
@@ -146,7 +151,9 @@ const tabRoute: Routes = [
     UserService,
     JobofferService,
     SpeechService,
-    RefugeesService
+    RefugeesService,
+    DonationService,
+    EvenementService
 
   ],
   bootstrap: [AppComponent]
