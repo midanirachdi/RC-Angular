@@ -1,0 +1,48 @@
+<div class="banner-area pdt100 pdb100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="banner-title">
+                        <h1>Events</h1>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li>|</li>
+                            <li><a href="/evenements" class="active">Events</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- // Banner -->
+
+
+
+    <!-- == Upcomming Event == -->
+    <div class="upcoming-event-body mt100 mb50">
+        <div class="container">
+            <div class="row">
+                <div *ngFor="let ev of evenements" class="col-sm-6">
+                    <div  class="upcoming-event-item">
+                        <div class="image">
+                            <img  src="assets/images/event/{{ev.imagename}}.jpg" class="img-responsive" alt="event image" width="500" height="500">
+                            <a routerLink="/evenement-details/{{ev.id}}" class="green-button button-hover-one">Read more</a>
+                        </div>
+                        <div class="event-detail">
+                            <div class="date green">
+                                <span>{{ev.dateEvent|date:"dd"}}</span>
+                                {{ev.dateEvent|date:"MMMM"}}
+                            </div>
+                            <div class="heading">
+                                <div class="time-address green">
+                                    <span><i class="ion-clock"></i>{{ev.dateEvent|date:"HH:mm"}}</span>
+                                    <span><i class="ion-ios-location-outline"></i>{{ev.location}}</span>
+                                </div>
+                                <h3><a href="#">{{ev.name}}</a></h3>
+                            </div>
+                        </div>
+                    </div><!--/.upcoming-event-item-->
+                </div>
+            </div>
+        </div>
+    </div>

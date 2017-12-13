@@ -14,7 +14,7 @@ export class EventsectionComponent implements OnInit {
 
   ngOnInit() {
     this.evenementService.GetUpcoming()
-      .subscribe(rep => this.evenements=rep);
+      .subscribe(rep => this.evenements=rep.slice(0,3));
   }
 
   faceshare(url: string) {

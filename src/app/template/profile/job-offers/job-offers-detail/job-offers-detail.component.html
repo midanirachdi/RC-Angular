@@ -49,7 +49,7 @@
           <p><strong>Address: </strong>{{joInDetail.companyAdress}}</p>
         </div>
         <div class="tab-pane" id="bestCandidates" role="tabpanel">
-          <div *ngFor="let r of refugees">
+          <div class="list-group-item" *ngFor="let r of refugees">
             <p><strong>Name </strong>{{r.firstname}} {{r.lastName}}</p>
             <p><strong>Gender </strong>{{r.sex}}</p>
             <p><strong>Date of birth </strong>{{r.dateOfBirth}}</p>
@@ -84,19 +84,27 @@
 
           <div class="input-group input-group-sm ">
 
-            <input placeholder="Title" class="form-control" [(ngModel)]="speechData" required formControlName="title"
+            <input placeholder="Title" class="form-control" required  formControlName="title"
                    type="text">
             <span class="input-group-btn">
-    <button (click)="switchState()" [ngClass]="(etatMic == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+    <button (click)="switchStateTitle()" [ngClass]="(etatMicTitle == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
             type="button">
-        <i [ngClass]="(etatMic == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+        <i [ngClass]="(etatMicTitle == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
     </button>
             </span>
           </div>
 
+          <div class="input-group input-group-md ">
 
             <textarea placeholder="Description" class="form-control" required formControlName="desc" cols="20"
                       rows="5"></textarea>
+          <span class="input-group-btn">
+    <button (click)="switchStateDesc()" [ngClass]="(etatMicDesc == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicDesc == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
 
           <div class="mBot5">
             <input class="form-control" formControlName="bd" required type="date">
@@ -104,19 +112,71 @@
           <div class="mBot5">
             <input class="form-control" formControlName="ed" required type="date">
           </div>
-          <input placeholder="Field of work" class="form-control" required formControlName="fow" type="text">
 
+          <div class="input-group input-group-sm">
+          <input placeholder="Field of work" class="form-control" required formControlName="fow" type="text">
+          <span class="input-group-btn">
+    <button (click)="switchStateFow()" [ngClass]="(etatMicFow == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicFow == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+          <div class="input-group input-group-sm">
           <input placeholder="Salary estimate" class="form-control" required formControlName="salaryE" type="number"
                  pattern="[0-9]+">
+          <span class="input-group-btn">
+    <button (click)="switchStateSalaryE()" [ngClass]="(etatMicSalaryE == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicSalaryE == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
         </div>
         <div class="col-xs-5">
+          <div class="input-group input-group-sm">
           <input placeholder="Contact name" class="form-control" required formControlName="contactN" type="text">
+          <span class="input-group-btn">
+    <button (click)="switchStateContactN()" [ngClass]="(etatMicContactN == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicContactN == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
+          <div class="input-group input-group-sm">
           <input placeholder="Contact email" class="form-control" required formControlName="contactE" type="text">
+          <span class="input-group-btn">
+    <button (click)="switchStateContactE()" [ngClass]="(etatMicContactE == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicContactE == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
+          <div class="input-group input-group-sm ">
           <input placeholder="Contact number" class="form-control" required formControlName="contactNumber"
                  type="number" pattern="[0-9]+">
+          <span class="input-group-btn">
+    <button (click)="switchStateContactNumber()" [ngClass]="(etatMicContactNumber == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicContactNumber == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+          <div class="input-group input-group-sm ">
           <input placeholder="Company name" class="form-control" required formControlName="companyN" type="text">
+          <span class="input-group-btn">
+    <button (click)="switchStateCompanyN()" [ngClass]="(etatMicCompanyN == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicCompanyN == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
           <input placeholder="Company address" class="form-control" required formControlName="companyA" type="text">
-          <button [disabled]="!jobofferForm.valid"
+
+            <button [disabled]="!jobofferForm.valid"
             type="submit"
             class="btn btn-primary">
             <span><i class="fa fa-check"></i></span> {{jobOfferFound === null? "Create":"Update"}}
