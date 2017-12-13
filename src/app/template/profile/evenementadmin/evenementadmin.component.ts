@@ -14,10 +14,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EvenementadminComponent implements OnInit {
   mesevenements: Evenement[];
-  campchef: User;
+  idcampchef: number;
   evenement: Evenement = { 'name': null , 'location': null ,
                        'imagename': null, 'dateEvent': null , 'nbplace': null,
-                       'description': null , 'id': null,'creator':null
+                       'description': null , 'id': null
                       };
   // Evenement Reactive form
   EventAddForm= new FormGroup({
@@ -32,13 +32,11 @@ export class EvenementadminComponent implements OnInit {
   ngOnInit() {
     this.userService.getMe().subscribe(rep => {
       this.mesevenements = rep['CampChef'].events;
-      this.campchef=rep['CampChef'];
+      this.idcampchef=rep['CampChef'].id;
     });
   }
   DoDeleteEvent(e: Evenement) {
     this.evenementService.delete(e).subscribe(
-      value => this.mesevenements.filter(x => x.id != e.id),
-      error => this.mesevenements.filter(x => x.id != e.id),
       ()=>this.mesevenements.filter(x => x.id != e.id)
     );
   }
@@ -49,12 +47,11 @@ export class EvenementadminComponent implements OnInit {
     this.evenement.dateEvent = this.datePipe.transform(this.EventAddForm.value.bd, 'yyyy-MM-dd HH:mm');
     this.evenement.nbplace = this.EventAddForm.value.capacity;
     this.evenement.description = this.EventAddForm.value.description;
-    this.evenement.creator=this.campchef;
     this.evenementService.AddEvenement(this.evenement).subscribe(
       () =>  {     this.mesevenements.push(Object.assign({}, this.evenement));
       this.evenement = {'name': null , 'location': null ,
                        'imagename': null, 'dateEvent': null , 'nbplace': null,
-                       'description': null , 'id': null ,'creator':null};
+                       'description': null , 'id': null };
     });
   }
 

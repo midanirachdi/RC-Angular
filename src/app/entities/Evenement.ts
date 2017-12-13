@@ -7,7 +7,6 @@ export class Evenement{
 	public name : string ,
 	public location : string ,
 	public description : string ,
-	public imagename : string ,
-	public creator : User
+	public imagename : string 
   ){}
 }
