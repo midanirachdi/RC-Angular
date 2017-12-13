@@ -18,8 +18,8 @@ export class StatisticsComponent implements OnInit {
   options: any;
   ngOnInit() {
     let a,b;
-    this.refugeesService.getRefugeesPerGender('homme').subscribe((res: number) => (this.MaleRefugees = res , a = this.MaleRefugees, console.log(this.MaleRefugees),
-    this.refugeesService.getRefugeesPerGender('femme').subscribe((r: number) => (this.FemaleRefugees = r , console.log(this.FemaleRefugees),   this.data = {
+    this.refugeesService.getRefugeesPerGender('Male').subscribe((res: number) => (this.MaleRefugees = res , a = this.MaleRefugees, console.log(this.MaleRefugees),
+    this.refugeesService.getRefugeesPerGender('Female').subscribe((r: number) => (this.FemaleRefugees = r , console.log(this.FemaleRefugees),   this.data = {
       labels: ['Males', 'Females'],
       datasets: [
           {

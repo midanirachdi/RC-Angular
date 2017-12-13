@@ -44,26 +44,8 @@ export class RefugeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    let a,b;
+    let a;
     this.refugeesService.GetAllRefugees().subscribe((resp) => {console.log(resp); this.refugees = resp; this.filtredRefugees = resp; } );
-    this.refugeesService.getRefugeesPerGender('homme').subscribe((res: number) => (this.MaleRefugees = res , a = this.MaleRefugees, console.log(this.MaleRefugees),
-    this.refugeesService.getRefugeesPerGender('femme').subscribe((r: number) => (this.FemaleRefugees = r , console.log(this.FemaleRefugees),   this.data = {
-      labels: ['Male', 'Female'],
-      datasets: [
-          {
-              data: [this.MaleRefugees, this.FemaleRefugees],
-              backgroundColor: [
-                  "#FF6384",
-                  "#36A2EB"
-              ],
-              hoverBackgroundColor: [
-                  "#FF6384",
-                  "#36A2EB"
-              ]
-          }]
-      }
-    ) )));
-
   }
 
   DoAddRefugee() {
@@ -75,7 +57,7 @@ export class RefugeesComponent implements OnInit {
     this.refugee.nationality = this.RefugeeAddForm.value.nationality;
     this.refugee.email = this.RefugeeAddForm.value.email;
     this.refugeesService.AddRefugee(this.refugee).subscribe(
-      () =>  {     this.refugees.push(Object.assign({}, this.refugee));
+      () =>  {     this.refugees.push(Object.assign({}, this.refugee)); this.filtredRefugees.push(this.refugee);
       this.refugee = {'id': null , 'firstname': null , 'lastName': null , 'sex': null, 'dateOfBirth': null ,
         'nationality': null, 'frenchlanguageLevel': null , 'englishlanguageLevel': null, 'highestDegree': null ,
          'yearsOfExperience': 3 , 'email': null, 'fieldOfWork': null, 'adress' : null, 'phoneNumber': null, 'fiche' : null  };
@@ -84,8 +66,8 @@ export class RefugeesComponent implements OnInit {
 
   DoDeleteRefugee(r: Refugee) {
     this.refugeesService.delete(r).subscribe(
-      res => this.refugees = this.refugees.filter(x => x.id !== r.id)
-    );
+      (res) => { this.refugees = this.refugees.filter(x => x.id !== r.id); this.filtredRefugees = this.filtredRefugees.filter(x => x.id !== r.id);
+      });
   }
 
   showDialog(r: Refugee) {
@@ -112,11 +94,11 @@ export class RefugeesComponent implements OnInit {
     this.refugee.nationality = this.RefugeeAddForm.value.nationality;
     this.refugee.email = this.RefugeeAddForm.value.email;
     this.refugeesService.updateRefugee(this.refugee).subscribe();
-    this.refugeesService.GetAllRefugees().subscribe((resp) => {this.refugees = resp; } );
+    this.refugeesService.GetAllRefugees().subscribe((resp) => {this.refugees = resp; this.filtredRefugees = resp; } );
   }
 
-  findRefugeesByName(event: any){
-    this.filtredRefugees = this.refugees.filter(x=>x.firstname.toUpperCase().startsWith(event.target.value.toUpperCase()));
+  findRefugeesByName(event: any) {
+    this.filtredRefugees = this.refugees.filter(x => x.firstname.toUpperCase().startsWith(event.target.value.toUpperCase()));
   }
 
 }
