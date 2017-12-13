@@ -1,3 +1,4 @@
+import { UIParams, FacebookService, UIResponse } from 'ngx-facebook';
 import { UserService } from './../services/user.service';
 import { User } from './../entities/User';
 import { Evenement } from './../entities/Evenement';
@@ -17,7 +18,7 @@ export class EvenementdetailsComponent implements OnInit {
   idvolunteer:number;
   note : string="none";
   role:string;
-  constructor(private route: ActivatedRoute, private evenementService: EvenementService,private userservice:UserService) { }
+  constructor(private fb: FacebookService,private route: ActivatedRoute, private evenementService: EvenementService,private userservice:UserService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -32,7 +33,22 @@ export class EvenementdetailsComponent implements OnInit {
     this.userservice.getMe().subscribe(rep => this.idvolunteer=rep['Volunteer'].id);
     console.log(this.id+" "+ e.value);
     console.log(this.idvolunteer);
-    this.evenementService.rateEvenement(this.idvolunteer,this.id,e.value).subscribe(t => console.log(t));
+    this.evenementService.rateEvenement(this.idvolunteer,this.id,e.value).subscribe(t => {
+      console.log(t);
+    });
+    window.alert("You Rated this event with "+e.value);
+  }
+
+  faceshare(url: string) {
+
+    let params: UIParams = {
+      href: url,
+      method: 'share'
+    };
+
+    this.fb.ui(params)
+      .then((res: UIResponse) => console.log(res))
+      .catch((e: any) => console.error(e));
   }
 
 }

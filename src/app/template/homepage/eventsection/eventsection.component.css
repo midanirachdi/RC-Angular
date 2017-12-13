@@ -1,0 +1,14 @@
+.btnshare{
+    background:url("../../../../assets/images/sharebtn2.png")no-repeat;
+    width:151px ;
+    height: 38px;
+
+
+
+}
+.btnshare:hover{
+    width:151px ;
+    height: 38px;  
+    background-position: 0px -37px;
+    cursor: pointer;
+}
