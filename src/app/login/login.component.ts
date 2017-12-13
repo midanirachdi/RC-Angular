@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,ChangeDetectorRef } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {User,Admin,CampChef,DistrictChef,Volunteer} from '../entities/User'
 import {AuthService} from '../services/auth.service';
@@ -24,22 +24,23 @@ export class LoginComponent implements OnInit,OnDestroy {
 
 
 
-  constructor(private authService:AuthService,private router:Router) {
+  constructor(private authService:AuthService,private router:Router,private cdRef:ChangeDetectorRef) {
     gapi.load('auth2', function () {
       gapi.auth2.init()
+    
    });
    }
 
   ngOnInit() {
     this.subscription=this.authService.userLogged.subscribe(isConnected=>{
       this.connected=isConnected;
-      console.log(this.connected);}
+      this.cdRef.detectChanges();
+      }
     );
 
     this.userSub=this.authService.user.subscribe((u:User)=>{this.user=u;
   
     });
-    
   }
 
   ngOnDestroy(){
@@ -68,7 +69,7 @@ export class LoginComponent implements OnInit,OnDestroy {
 
  onLogOut(){
    this.authService.LogOut();
-   this.router.navigate(['/'])
+   console.log("dec btn" +this.connected);
  }
 
 }

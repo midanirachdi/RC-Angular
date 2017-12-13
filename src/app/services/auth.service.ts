@@ -50,7 +50,6 @@ export class AuthService implements OnDestroy {
 
 
   public BasicAuth(login:string,psd:string){
-
     this.http.get(LOGIN_URL,{
       headers: new HttpHeaders().set('Authorization',"Basic "+btoa(login+':'+psd)),
       observe: 'response',
@@ -158,7 +157,7 @@ export class AuthService implements OnDestroy {
     this.userLogged.next(false);
     localStorage.clear();
     this.lg=false;
-    console.log('dec')
+    console.log("service logout" + this.userLogged.getValue());
     this.router.navigate(['']);
   }
 

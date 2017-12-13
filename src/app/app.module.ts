@@ -19,7 +19,7 @@ import {RouterModule, Routes,CanActivate} from "@angular/router";
 import {ButtonModule, CalendarModule, DialogModule, ChartModule} from "primeng/primeng";
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+//import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JobOffersComponent} from './template/profile/job-offers/job-offers.component';
 import {HomepageComponent} from './template/homepage/homepage.component';
 import {ProfileComponent} from './template/profile/profile.component';
@@ -59,6 +59,8 @@ import { RefugeesComponent } from './template/profile/refugees/refugees.componen
 import { RefugeesService } from './services/refugees.service';
 import { StatisticsComponent } from './template/homepage/statistics/statistics.component';
 import { StatisticsAgeComponent } from './template/homepage/statistics-age/statistics-age.component';
+import { EditFormComponent } from './template/profile/user-info/edit-form/edit-form.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
 
 
 
@@ -66,6 +68,7 @@ import { StatisticsAgeComponent } from './template/homepage/statistics-age/stati
 const tabRoute: Routes = [
   {path: "", component: HomepageComponent, pathMatch: 'full'},
   {path: "home", component: HomepageComponent, pathMatch: 'full'},
+  {path: "register", component: RegisterFormComponent, pathMatch: 'full'},
   {
     path: "profile", component: ProfileComponent,canActivate: [AuthGuard],
     children: [
@@ -118,11 +121,12 @@ const tabRoute: Routes = [
     EditnewsComponent,
     RefugeesComponent,
     StatisticsComponent,
-    StatisticsAgeComponent
+    StatisticsAgeComponent,
+    EditFormComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     FacebookModule.forRoot(),

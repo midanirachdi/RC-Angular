@@ -1,0 +1,20 @@
+
+            <table class="info-table">
+              <form #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
+              <tr>
+                  <td><label>First Name :</label></td>
+                  <td><input class="form-control" name="firstName" ngModel="{{user?.firstName}}"type="text"/> </td>
+              </tr>
+              <tr>
+                  <td><label>Last Name :</label></td>
+                  <td><input class="form-control" name="lastName" ngModel="{{user?.lastName}}" type="text"/></td>
+              </tr>
+              <tr>
+                  <td><label>Email :</label></td>
+                  <td><input class="form-control" name="email" ngModel="{{user?.email}}"  type="text" /> </td>
+              </tr>
+              <tr>
+                  <td><button type="submit" class="btn btn-primary">Save</button></td>
+              </tr>
+          </form>
+          </table>
