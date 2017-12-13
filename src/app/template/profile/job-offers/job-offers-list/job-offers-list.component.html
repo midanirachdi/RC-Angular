@@ -1,4 +1,4 @@
-<div class="row mBot">
+<div class="row mBot" *ngIf="user">
   <div class="col-xs-12">
     <button *ngIf="role==='DistrictChef'" class="btn btn-success" (click)="showAddForm()">
       <span><i class="fa fa-plus"></i></span> New job offer</button>
@@ -15,7 +15,7 @@
       [joboffer]="jobofferEl"></app-job-offers-item>
   </div>
 </div>
-<ng-template  #infoText>
+<ng-template  #infoText *ngIf="user">
   <div class="row scrollAndFixedHeight">
     <div class="col-xs-12">
       <strong>Please add a job offer </strong>

@@ -2,7 +2,7 @@
   <div class="row mNull mBot">
     <div *ngIf="role==='DistrictChef'" class="pull-right">
       <div  class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" (click)="onSelected()" class="btn btn-info">
+        <button type="button" (click)="onSelected(joboffer)" class="btn btn-info">
           <span><i class="fa fa-info"></i></span></button>
         <button type="button" (click)="onUpdate(joboffer)" class="btn btn-warning">
           <span><i class="fa fa-pencil"></i></span></button>
@@ -12,7 +12,7 @@
     </div>
     <div *ngIf="role==='CampChef'" class="pull-right">
       <div  class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" (click)="onSelected()" class="btn btn-info">
+        <button type="button" (click)="onSelected(joboffer)" class="btn btn-info">
           <span><i class="fa fa-info"></i></span></button>
       </div>
     </div>
