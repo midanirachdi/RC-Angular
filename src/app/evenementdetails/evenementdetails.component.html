@@ -33,7 +33,7 @@
                             <li class="bt-location"><i class="fa fa-map-marker"></i>{{evenement?.location}} <span>Africa</span></li>
                             <li class="bt-location"><i class="fa fa-calendar-o"></i><span>{{evenement?.dateEvent|date:"dd"}} {{evenement?.dateEvent|date:"MMMM"}}, {{evenement?.dateEvent|date:"y"}}</span></li>
                         </ul>
-                        <p-rating [(ngModel)]="val3" [cancel]="false" (onRate)="handleRate($event)"></p-rating>
+                        <p-rating *ngIf="role==='Volunteer'" [(ngModel)]="val3" [cancel]="false" (onRate)="handleRate($event)"></p-rating>
                         <h5>Rate : {{note}} </h5>
                     </div>
                     <div class="event-contet">

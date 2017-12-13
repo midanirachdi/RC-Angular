@@ -16,6 +16,7 @@ export class EvenementdetailsComponent implements OnInit {
   evenement:Evenement;
   idvolunteer:number;
   note : string="none";
+  role:string;
   constructor(private route: ActivatedRoute, private evenementService: EvenementService,private userservice:UserService) { }
 
   ngOnInit() {
@@ -24,6 +25,7 @@ export class EvenementdetailsComponent implements OnInit {
     });
     this.evenementService.GetEvenement(this.id).subscribe(rep=>this.evenement=rep);
     this.evenementService.getNote(this.id).subscribe(rep => this.note= rep);
+    this.role=localStorage.getItem('role');
   }
 
   handleRate(e){

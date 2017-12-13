@@ -70,6 +70,8 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { EvenementlistingComponent } from './evenementlisting/evenementlisting.component';
 import { EvenementdetailsComponent } from './evenementdetails/evenementdetails.component';
 import { DonationComponent } from './donation/donation.component';
+import { EvenementadminComponent } from './template/profile/evenementadmin/evenementadmin.component';
+import { ResumePipe } from './pipes/resume.pipe';
 
 const tabRoute: Routes = [
   {path: "", component: HomepageComponent, pathMatch: 'full'},
@@ -88,7 +90,8 @@ const tabRoute: Routes = [
       { path: "joboffers", component: JobOffersComponent },
       { path: "managenews", component: ManagenewsComponent },
       { path: "managenews/addnews", component: AddnewsComponent },
-      { path: 'refugees', component: RefugeesComponent }
+      { path: 'refugees', component: RefugeesComponent },
+      { path: 'eventadmin', component: EvenementadminComponent }
     ]
   }]
 
@@ -134,6 +137,8 @@ const tabRoute: Routes = [
     EvenementlistingComponent,
     EvenementdetailsComponent,
     DonationComponent,
+    EvenementadminComponent,
+    ResumePipe,
 
   ],
   imports: [
