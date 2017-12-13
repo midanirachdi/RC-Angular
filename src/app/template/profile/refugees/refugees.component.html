@@ -1,11 +1,14 @@
 <br><br><br><br><br>
 <h3>List of all refugees</h3>
+
 <div id="RefugeesPage">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add a new Refugee</button><br><br>
 <div class="form-inline">
-  <input type="text" class="form-control" placeholder="Refugee name" #name />&emsp;<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalDetails">Find Refugee</button><br><br>
+  <input type="text" class="form-control" name="name" placeholder="Search" (keyup)="findRefugeesByName($event)" /><br><br>
 </div>
-  <table class="table table-bordered">
+
+
+<table class="table table-bordered">
   <th class="info">Firstname</th>
   <th class="info">Last name</th>
   <th class="info">Sex</th>
@@ -13,7 +16,7 @@
   <th class="info">Nationality</th>
   <th class="info">E-mail</th>
   <th></th>
-  <tr *ngFor="let r of refugees">
+  <tr *ngFor="let r of filtredRefugees">
     <td>{{ r.firstname}}</td>
     <td>{{ r.lastName}}</td>
     <td>{{ r.sex}}</td>
@@ -27,6 +30,7 @@
   </tr>
 </table>
 </div>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
