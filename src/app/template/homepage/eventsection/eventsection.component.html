@@ -14,7 +14,7 @@
                         <div class="image">
                             <img src="assets/images/event/{{e.imagename}}.jpg" class="img-responsive" style="min-height:235px;" alt=" ">
                             <div class="date green-ovelay">
-                                <span class="day">{{e.dateEvent|date:"EEEE"}}</span>
+                                <span class="day" style="font-size:31px;">{{e.dateEvent|date:"EEEE"}}</span>
                                 <span class="year">{{e.dateEvent|date:"dd"}} {{e.dateEvent|date:"MMMM"}} {{e.dateEvent|date:"y"}}</span>
                             </div>
                         </div>
@@ -27,10 +27,12 @@
                                 <span><i class="ion-ios-location green"></i>{{e.location}}</span>
                                 <a [routerLink]="['evenement-details',e.id]">Read More</a>
                             </div>
-                            
+
                             <ul class="sharing-buttons">
                                 <li>
-                                    <a class="facebook" style="color:#4267b2" (click)="faceshare('localhost:4200/evenement-details/'+e.id)"><i class="fa fa-facebook-square"></i>Share on Facebook</a>
+                                    <a class="facebook" style="color:#4267b2" (click)="faceshare('https://www.facebook.com/HelpRefugeesUK/')" class="social">
+                                        <div class="btnshare"></div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>

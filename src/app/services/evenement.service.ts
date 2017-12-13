@@ -1,3 +1,4 @@
+import { Body } from '@angular/http/src/body';
 import { User } from './../entities/User';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Evenement } from '../entities/Evenement';
@@ -41,6 +42,14 @@ export class EvenementService {
 
   public updateRefugee(e: Evenement) {
     return this.http.put(this.url, JSON.stringify(e));
+  }
+  
+  public rateEvenement(idvolunteer:number , idevenement:number , note : number){
+    return this.http.get(this.url+"/rateEvent/"+idvolunteer+"/"+idevenement+"/"+note);
+  }
+
+  public getNote(idevenement : number) :Observable<string>{
+    return this.http.get<string>(this.url+"/rating/"+idevenement);
   }
 
   public delete(e: Evenement) {

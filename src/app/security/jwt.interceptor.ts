@@ -19,7 +19,7 @@ export class jwtInterceptor implements HttpInterceptor{
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('intercept');
-    if(request.url!=LOGIN_URL)
+    if(request.url!=LOGIN_URL && this.getToken()!=null)
     { request = request.clone({
       setHeaders: {
         Authorization: this.getToken()
