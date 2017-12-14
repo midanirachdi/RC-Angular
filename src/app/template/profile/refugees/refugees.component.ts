@@ -3,7 +3,7 @@ import { SelectItem } from 'primeng/primeng';
 import { Refugee } from '../../../entities/refugee';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RefugeesService } from '../../../services/refugees.service';
-
+declare var  $: any;
 @Component({
   selector: 'app-refugees',
   templateUrl: './refugees.component.html',
@@ -36,15 +36,14 @@ export class RefugeesComponent implements OnInit {
     sex : new FormControl('', Validators.required),
     dateOfBirth : new FormControl('', Validators.required),
     nationality : new FormControl('', Validators.required),
-    phoneNumber : new FormControl('', [Validators.required , Validators.min(10000000), Validators.max(99999999999)]),
-    email : new FormControl('', [Validators.required, Validators.email]),
+    phoneNumber : new FormControl('', Validators.compose([Validators.required , Validators.min(10000000), Validators.max(99999999999)])),
+    email : new FormControl('', Validators.compose([Validators.required, Validators.email])),
   });
   constructor(private refugeesService: RefugeesService) {
 
   }
 
   ngOnInit() {
-    let a;
     this.refugeesService.GetAllRefugees().subscribe((resp) => {console.log(resp); this.refugees = resp; this.filtredRefugees = resp; } );
   }
 
@@ -61,7 +60,11 @@ export class RefugeesComponent implements OnInit {
       this.refugee = {'id': null , 'firstname': null , 'lastName': null , 'sex': null, 'dateOfBirth': null ,
         'nationality': null, 'frenchlanguageLevel': null , 'englishlanguageLevel': null, 'highestDegree': null ,
          'yearsOfExperience': 3 , 'email': null, 'fieldOfWork': null, 'adress' : null, 'phoneNumber': null, 'fiche' : null  };
+         $(function () {
+          $('#myModal').modal('toggle');
+       });
     });
+
   }
 
   DoDeleteRefugee(r: Refugee) {
@@ -95,6 +98,7 @@ export class RefugeesComponent implements OnInit {
     this.refugee.email = this.RefugeeAddForm.value.email;
     this.refugeesService.updateRefugee(this.refugee).subscribe();
     this.refugeesService.GetAllRefugees().subscribe((resp) => {this.refugees = resp; this.filtredRefugees = resp; } );
+    this.display = false;
   }
 
   findRefugeesByName(event: any) {
