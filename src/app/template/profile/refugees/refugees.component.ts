@@ -56,10 +56,8 @@ export class RefugeesComponent implements OnInit {
     this.refugee.nationality = this.RefugeeAddForm.value.nationality;
     this.refugee.email = this.RefugeeAddForm.value.email;
     this.refugeesService.AddRefugee(this.refugee).subscribe(
-      () =>  {     this.refugees.push(Object.assign({}, this.refugee)); this.filtredRefugees.push(this.refugee);
-      this.refugee = {'id': null , 'firstname': null , 'lastName': null , 'sex': null, 'dateOfBirth': null ,
-        'nationality': null, 'frenchlanguageLevel': null , 'englishlanguageLevel': null, 'highestDegree': null ,
-         'yearsOfExperience': 3 , 'email': null, 'fieldOfWork': null, 'adress' : null, 'phoneNumber': null, 'fiche' : null  };
+      () =>  {
+         this.refugeesService.GetAllRefugees().subscribe((resp) => {console.log(resp); this.refugees = resp; this.filtredRefugees = resp; } );
          $(function () {
           $('#myModal').modal('toggle');
        });
