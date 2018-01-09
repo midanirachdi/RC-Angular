@@ -102,19 +102,14 @@ const tabRoute: Routes = [
       { path: 'managestock', component: ManagestockComponent },
       { path: 'managestock/addstock', component: AddstockComponent },
       { path: 'managestock/editstock/:id', component: EditstockComponent },
-      { path: 'managestock/requesedneeds', component: ManagerequestedneedsComponent }
+      { path: 'managestock/requesedneeds', component: ManagerequestedneedsComponent },
       { path: "home", component: UserInfoComponent, pathMatch: 'full' },
       { path: "joboffers", component: JobOffersComponent },
-      { path: "managenews", component: ManagenewsComponent },
-      { path: "managenews/addnews", component: AddnewsComponent },
       { path: 'refugees', component: RefugeesComponent },
       { path: 'eventadmin', component: EvenementadminComponent },
       { path: "courses", component: CoursesComponent }
     ]
-  },
-  { path: 'news', component: NewsComponent},
-  { path: 'news/:id', component: SinglepostfullComponent },
-  { path: 'error404', component: Error404Component }
+  }
 
 
 ];
@@ -183,7 +178,7 @@ const tabRoute: Routes = [
     NgxPaginationModule,
     TrumbowygModule.forRoot({ plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0' }), //Optional config : plug-ins and version
     JsonpModule,
-    DisqusModule
+    DisqusModule,
     ChartModule,
     RatingModule,
     BrowserAnimationsModule
