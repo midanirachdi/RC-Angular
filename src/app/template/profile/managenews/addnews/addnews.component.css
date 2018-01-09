@@ -2,13 +2,8 @@
   display: flex;
   justify-content: space-between;
 }
-.btt{
-  margin-top: 10px;
-  height: 40px;
-background-color: white;
-}
-.btt:hover{
-  background-color: #00bcd4;
+[hidden] {
+  display: none !important;
 }
 
 .preview {

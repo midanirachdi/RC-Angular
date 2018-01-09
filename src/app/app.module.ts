@@ -19,7 +19,6 @@ import { VolunteersectionComponent } from './template/homepage/volunteersection/
 import {RouterModule, Routes,CanActivate} from "@angular/router";
 import { ButtonModule, CalendarModule, DialogModule, ChartModule , RatingModule } from "primeng/primeng";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { JobOffersComponent } from './template/profile/job-offers/job-offers.component';
 import { HomepageComponent } from './template/homepage/homepage.component';
 import { ProfileComponent } from './template/profile/profile.component';
@@ -57,6 +56,12 @@ import { NoSanitizePipe } from './pipes/no-sanitize.pipe';
 import { HtmlSlicePipe } from './pipes/html-slice.pipe';
 import { HtmlremovehrPipe } from './pipes/htmlremovehr.pipe';
 import { EditnewsComponent } from './template/profile/managenews/editnews/editnews.component';
+import {DisqusModule} from "ng2-awesome-disqus";
+import { ManagestockComponent } from './template/profile/managestock/managestock.component';
+import { AddstockComponent } from './template/profile/managestock/addstock/addstock.component';
+import { EditstockComponent } from './template/profile/managestock/editstock/editstock.component';
+import { ManageneedsComponent } from './template/profile/managestock/manageneeds/manageneeds.component';
+import { ManagerequestedneedsComponent } from './template/profile/managestock/managerequestedneeds/managerequestedneeds.component';
 import { RefugeesComponent } from './template/profile/refugees/refugees.component';
 import { RefugeesService } from './services/refugees.service';
 import { DonationService } from './services/donation.service';
@@ -88,17 +93,25 @@ const tabRoute: Routes = [
   {
     path: "profile", component: ProfileComponent,canActivate: [AuthGuard],
     children: [
+      {path: "", component: UserInfoComponent, pathMatch: 'full'},
+      {path: "joboffers", component: JobOffersComponent},
+      {path: "managenews", component: ManagenewsComponent},
+      {path: "managenews/addnews", component: AddnewsComponent},
+      { path: 'managenews/editnews/:id', component: EditnewsComponent },
+      { path: 'managestock', component: ManagestockComponent },
+      { path: 'managestock/addstock', component: AddstockComponent },
+      { path: 'managestock/editstock/:id', component: EditstockComponent },
+      { path: 'managestock/requesedneeds', component: ManagerequestedneedsComponent },
       { path: "home", component: UserInfoComponent, pathMatch: 'full' },
       { path: "joboffers", component: JobOffersComponent },
-      { path: "managenews", component: ManagenewsComponent },
-      { path: "managenews/addnews", component: AddnewsComponent },
       { path: 'refugees', component: RefugeesComponent },
       { path: 'eventadmin', component: EvenementadminComponent },
       { path: "courses", component: CoursesComponent }
     ]
-  }]
+  }
 
 
+];
 
 @NgModule({
   declarations: [
@@ -143,6 +156,12 @@ const tabRoute: Routes = [
     EvenementadminComponent,
     CoursesComponent,
     ResumePipe,
+    ManagestockComponent,
+    AddstockComponent,
+    EditstockComponent,
+    ManageneedsComponent,
+    ManagerequestedneedsComponent
+
 
   ],
   imports: [
@@ -158,9 +177,9 @@ const tabRoute: Routes = [
     NgxPaginationModule,
     TrumbowygModule.forRoot({ plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0' }), //Optional config : plug-ins and version
     JsonpModule,
+    DisqusModule,
     ChartModule,
-    RatingModule,
-    BrowserAnimationsModule
+    RatingModule
 
   ],
   providers: [

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {NewsService} from "../services/news.services";
 import {Router, ActivatedRoute} from "@angular/router";
 import {LocationService} from "../services/location.service";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -19,6 +20,7 @@ export class NewsComponent implements OnInit {
     console.log('scrolled!!')
   }
   news: News[]= new Array();
+  newsSub:Subscription;
   p: number = 1;
   countryInfo: string;
   country: any;
@@ -48,7 +50,7 @@ export class NewsComponent implements OnInit {
               res=>{
                 var newData = JSON.stringify(res.json());
                 this.country= JSON.parse(newData);
-                this.newsService.getByCountry(this.country.countryName).subscribe(news =>this.news = news);
+                this.newsSub=this.newsService.getByCountry(this.country.countryName).subscribe(news =>this.news = news);
                 this.countryInfo=this.country.countryName;
               })
         },
@@ -73,12 +75,15 @@ export class NewsComponent implements OnInit {
 
   }
   getNews(){
-    this.newsService.GetAllNews().subscribe(news =>this.news = news);
+    this.newsSub=this.newsService.GetAllNews().subscribe(news =>this.news = news);
 
   }
 
   scrollUp(){
     window.scrollTo(0, 0);
+  }
+  ngOnDestroy(){
+    this.newsSub.unsubscribe();
   }
 
 }

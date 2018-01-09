@@ -1,12 +1,16 @@
 <div class="cont">
 <!-- Second navbar for sign in -->
+  <h2>Manage News</h2>
+  <br>
 <nav class="navbar navbar-default">
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-collapse-2">
       <ul class="nav navbar-nav">
         <li><a [routerLink]="['addnews']">Add News</a></li>
-      </ul>
+
+          </ul>
+
     </div>
 
 </nav>
@@ -19,19 +23,20 @@
       <td>Location</td>
       <td>Edit</td>
       <td>Delete</td>
-      <td>Upload Media</td>
+      <td>Upload/Change<br>Cover photo</td>
     </tr>
 
 
-    <tr *ngFor="let n of news ">
+    <tr *ngFor="let n of news  ">
       <td>{{n.title}}</td>
       <td>{{n.dateOfCreation}}</td>
       <td>{{n.author}}</td>
       <td>{{n.location}}</td>
       <!--bouttons d'action-->
-      <td><button>Edit</button></td>
-      <td><button>Delete</button></td>
-      <td><button>Upload Media</button></td>
+      <td class="aligne"><a [routerLink]="['editnews', n.id]"><i class="fa fa-pencil-square" aria-hidden="true"></i></a></td>
+      <td  class="aligne"><a [routerLink]="['./']"(click)="deleteNews(n.id)" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <td  class="aligne"><label  aria-hidden="true"><i class="fa fa-upload"></i><input type="file" [multiple]="multiple" #fileInput (change)="upload(n.id)" hidden ></label></td>
+
     </tr>
 
   </table>

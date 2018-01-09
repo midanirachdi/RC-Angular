@@ -1,0 +1,57 @@
+<h2>Add Stock</h2>
+<br>
+<form (ngSubmit)="onSubmit(stockForm.value)" #stockForm="ngForm">
+  <table width="60%">
+    <tr>
+      <td>
+        <label>Stock Type</label>
+      </td>
+      <td>
+        <select class="form-control" name="location" [(ngModel)]="currentstock.stockType"   >
+          <option value="" disabled selected>Select Stock Type</option>
+          <option value="Water" title="Water">Water</option>
+          <option value="Clothes" title="Clothes">Clothes</option>
+          <option value="Food" title="Food">Food</option>
+          <option value="Tents" title="Tents">Tents</option>
+          <option value="Medicines" title="Medicines">Medicines</option>
+          <option value="Covers" title="Covers">Covers</option>
+        </select>
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <label>Quantity</label>
+      </td>
+      <td>
+        <input type="number" name="quantity" placeholder="Quantity" class="form-control" [(ngModel)]="currentstock.qteTotal">
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <label>Value</label>
+      </td>
+      <td>
+        <input type="number" name="value" placeholder="Value" class="form-control" [(ngModel)]="currentstock.stockValue">
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <label>Notes</label>
+      </td>
+      <td>
+        <input type="text" name="notes" placeholder="Notes" class="form-control" [(ngModel)]="currentstock.notes">
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="Submit" class="btn button-style-two btt">
+      </td>
+    </tr>
+  </table>
+</form>
+

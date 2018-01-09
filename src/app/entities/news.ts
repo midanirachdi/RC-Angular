@@ -8,6 +8,7 @@ export class News {
     content: string;
     location: string;
     dateOfCreation: string;
+    mainPhoto:string;
   /*constructor(public id?:string,
               public title?:string,
               public author?: string,
