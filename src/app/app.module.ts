@@ -50,6 +50,12 @@ import { NoSanitizePipe } from './pipes/no-sanitize.pipe';
 import { HtmlSlicePipe } from './pipes/html-slice.pipe';
 import { HtmlremovehrPipe } from './pipes/htmlremovehr.pipe';
 import { EditnewsComponent } from './template/profile/managenews/editnews/editnews.component';
+import {DisqusModule} from "ng2-awesome-disqus";
+import { ManagestockComponent } from './template/profile/managestock/managestock.component';
+import { AddstockComponent } from './template/profile/managestock/addstock/addstock.component';
+import { EditstockComponent } from './template/profile/managestock/editstock/editstock.component';
+import { ManageneedsComponent } from './template/profile/managestock/manageneeds/manageneeds.component';
+import { ManagerequestedneedsComponent } from './template/profile/managestock/managerequestedneeds/managerequestedneeds.component';
 
 
 
@@ -62,7 +68,12 @@ const tabRoute: Routes = [
       {path: "", component: UserInfoComponent, pathMatch: 'full'},
       {path: "joboffers", component: JobOffersComponent},
       {path: "managenews", component: ManagenewsComponent},
-      {path: "managenews/addnews", component: AddnewsComponent}
+      {path: "managenews/addnews", component: AddnewsComponent},
+      { path: 'managenews/editnews/:id', component: EditnewsComponent },
+      { path: 'managestock', component: ManagestockComponent },
+      { path: 'managestock/addstock', component: AddstockComponent },
+      { path: 'managestock/editstock/:id', component: EditstockComponent },
+      { path: 'managestock/requesedneeds', component: ManagerequestedneedsComponent }
     ]
   },
   { path: 'news', component: NewsComponent},
@@ -103,7 +114,14 @@ const tabRoute: Routes = [
     NoSanitizePipe,
     HtmlSlicePipe,
     HtmlremovehrPipe,
-    EditnewsComponent
+    EditnewsComponent,
+    ManagestockComponent,
+    AddstockComponent,
+    EditstockComponent,
+    ManageneedsComponent,
+    ManagerequestedneedsComponent
+
+
   ],
   imports: [
     BrowserModule,
@@ -119,6 +137,7 @@ const tabRoute: Routes = [
     NgxPaginationModule,
     TrumbowygModule.forRoot({plugins: ['colors', 'noembed', 'preformatted', 'pasteimage', 'upload'], version: '2.8.0'}), //Optional config : plug-ins and version
     JsonpModule,
+    DisqusModule
 
   ],
   providers: [
