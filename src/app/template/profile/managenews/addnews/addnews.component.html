@@ -272,5 +272,6 @@
 </trumbowyg>
 </div>
 <div class="preview blog-content"  *ngIf="showPreview" [innerHTML]="contentTwo"></div>
-
+  <!--<file-upload #fu (change)="fu.upload()" [multiple]="true"></file-upload>-->
+  <label class="btn button-style-two btt">Upload media <input type="file" [multiple]="multiple" #fileInput (change)="upload()" hidden ></label>
 </form>

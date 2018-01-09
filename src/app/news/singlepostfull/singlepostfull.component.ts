@@ -3,6 +3,7 @@ import {News} from "../../entities/news";
 import {NewsService} from "../../services/news.services";
 import {ActivatedRoute, Router, Params} from "@angular/router";
 import 'rxjs/add/operator/map';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-singlepostfull',
@@ -13,26 +14,30 @@ import 'rxjs/add/operator/map';
 export class SinglepostfullComponent implements OnInit {
 
   id: number;
-  news: News;
+  news=new News();
+  public href: string = "";
+  newsSub:Subscription;
+  public shortname="refugeescamps-tn";
 
 
-  constructor(private route: ActivatedRoute, private newsService: NewsService) {}
+
+  constructor(private route: ActivatedRoute, private newsService: NewsService,private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(params) //log the entire params object
-      console.log(params['id']) //log the value of id
+      console.log(params); //log the entire params object
+      console.log(params['id']); //log the value of id
       this.id=params['id'];
       this.getNewsById(params['id']);
-      if(this.newsService.GetById(params['id']).isEmpty)
-      {
-        console.log('fuck off')
-      }
+
     });
 
   }
   getNewsById(id : number):void{
-    this.newsService.GetById(id).subscribe(arr =>this.news = <News>arr);
-
+    this.newsSub=this.newsService.GetById(id).subscribe(arr =>this.news = <News>arr);
+    this.href = this.router.url;
+  }
+  ngOnDestroy(){
+    this.newsSub.unsubscribe();
   }
 }
