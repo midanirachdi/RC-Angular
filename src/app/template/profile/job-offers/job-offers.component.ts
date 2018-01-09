@@ -2,19 +2,19 @@ import {JobofferService} from "../../../services/joboffer.service";
 import {Component, OnInit} from '@angular/core';
 import {Joboffer} from "../../../entities/joboffer";
 import {Refugee} from "../../../entities/refugee";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {DatePipe} from "@angular/common";
+import {User} from "../../../entities/User";
+import {Subscription} from "rxjs/Subscription";
+import {AuthService} from "../../../services/auth.service";
 
 
 @Component({
   selector: 'app-job-offers',
   templateUrl: './job-offers.component.html',
-  styleUrls: ['./job-offers.component.css'],
-  providers: [DatePipe]
+  styleUrls: ['./job-offers.component.css']
 })
 export class JobOffersComponent implements OnInit{
 
-  joSelected: Joboffer;
+  joSelected: Joboffer = null;
   jobOffers: Joboffer[];
   refugees:Refugee[];
   jobOfferFound: Joboffer = null;
@@ -22,67 +22,40 @@ export class JobOffersComponent implements OnInit{
  // user:User;
  // userSub:Subscription;
 
-  etat : boolean;
-  etat2 = false;
-  etat3 = false;
+  etat =false;
   error = '';
-  jobofferForm = new FormGroup({
-    title: new FormControl('', Validators.required),
-    contactN: new FormControl('', Validators.required),
-    companyN: new FormControl('', Validators.required),
-    companyA: new FormControl('', Validators.required),
-    contactE: new FormControl('', Validators.required),
-    desc: new FormControl('', Validators.required),
-    bd: new FormControl('', Validators.required),
-    ed: new FormControl('', Validators.required),
-    contactNumber: new FormControl('', Validators.required),
-    fow: new FormControl('', Validators.required),
-    salaryE: new FormControl('', Validators.required)
-  });
 
-  constructor(private jobOfferService: JobofferService,
-              private datePipe: DatePipe) {
+  userSub:Subscription;
+  user:User;
+  role:string;
+  constructor(private jobOfferService: JobofferService,private authService:AuthService) {
   }
 
   ngOnInit() {
+    this.userSub=this.authService.user.subscribe((u)=>{
+      this.user=u;
+    });
+    this.role=localStorage.getItem('role');
     this.jobOfferService.jobOfferSelected.subscribe(
       (jo: Joboffer) => {
         this.joSelected = jo;
-        if (this.joSelected !=null)
-          this.etat=false;
+        //fixed finally ~~~~~~~~~
+        this.jobOfferFound=null;
+        this.etat=false;
+        console.log(this.jobOfferFound);
       }
     );
+    this.jobOfferService.jobOfferFound.subscribe(
+      (jo:Joboffer)=>{
+        this.jobOfferFound=jo;
+      }
+
+    );
       this.jobOfferService.etat.subscribe(
-      (etat:boolean)=>{this.etat=etat;
+      (etat:boolean)=>{
+        this.etat=etat;
         if(this.etat==true)
-          this.joSelected=null}
-    );
-  }
-
-  getAll() {
-    this.etat = !this.etat;
-    this.jobOfferService.getAllJobOffers().subscribe(
-      (joboffers: Joboffer[]) => {
-        //console.log(resp.json());
-        /*for (let i=0;i<resp.json().length;i++){
-        console.log(resp.json()[i].districtchef.DistrictChef.firstName);
-        }*/
-        this.jobOffers = joboffers;
-      },
-      (error) => {
-        this.error = error
-      },
-    );
-  }
-
-  getById(id: number) {
-    this.etat = !this.etat;
-    this.jobOfferService.getJobOfferById(id).subscribe(
-      (jobOffer: Joboffer) => {
-        this.jobOffers = Array.of(jobOffer);
-      },
-      (error) => {
-        this.error = error
+        {    this.joSelected=null}
       }
     );
   }
@@ -99,75 +72,5 @@ export class JobOffersComponent implements OnInit{
     );
   }
 
-  deleteJO(id: number) {
-    this.etat = !this.etat;
-    this.jobOfferService.deleteJobOffer(id);
-  }
 
-  onSubmit() {
-    const newJobOffer = new Joboffer(
-      this.jobofferForm.value.desc,
-      this.datePipe.transform(this.jobofferForm.value.bd, 'yyyy-MM-dd'),
-      this.datePipe.transform(this.jobofferForm.value.ed, 'yyyy-MM-dd'),
-      this.jobofferForm.value.contactNumber,
-      this.jobofferForm.value.fow,
-      this.jobofferForm.value.salaryE,
-      this.jobofferForm.value.companyN,
-      this.jobofferForm.value.companyA,
-      this.jobofferForm.value.contactE,
-      this.jobofferForm.value.contactN,
-      this.jobofferForm.value.title);
-    console.log(newJobOffer);
-    if(this.jobOfferFound === null){
-      console.log('triple');
-      this.jobOfferService.addJobOffer(newJobOffer).subscribe();
-    }
-    else{
-      newJobOffer.id=this.jobOfferFound.id;
-      this.jobOfferService.updateJobOffer(newJobOffer).subscribe();
-
-    }
-  }
-
-  showUpdate(id: number) {
-
-    console.log();
-
-    this.jobOfferService.getJobOfferById(id).subscribe(
-      (jobOffer: Joboffer) => {
-        this.jobOfferFound = jobOffer;
-        this.etat2 = !this.etat2;
-        this.jobofferForm.setValue({
-          'title': this.jobOfferFound.title,
-          'contactN': this.jobOfferFound.contactName,
-          'companyN': this.jobOfferFound.companyName,
-          'companyA':this.jobOfferFound.companyAdress,
-          'contactE':this.jobOfferFound.contactEmail,
-          'desc':this.jobOfferFound.description,
-          'bd':this.jobOfferFound.begindate,
-          'ed':this.jobOfferFound.enddate,
-          'contactNumber':this.jobOfferFound.contactnumber,
-          'fow':this.jobOfferFound.fieldOfWork,
-          'salaryE':this.jobOfferFound.salaryEstimate
-        });
-
-
-      }
-    );
-
-    console.log(this.jobOfferFound);
-
-  }
-  getBestCandsEmail(jobOffer_id:number){
-    this.etat3=!this.etat3;
-    this.jobOfferService.getBestCandidatesAndEmailThem(jobOffer_id).subscribe(
-      (refugees:Refugee[])=>{
-        this.refugees=refugees
-      }
-    );
-  }
-
-
-  changeState(state:boolean){ this.displayDetail =!state;
-  console.log()}
 }

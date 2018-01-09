@@ -1,4 +1,4 @@
-<div *ngIf="joInDetail">
+<div *ngIf="joInDetail " >
   <div class="row">
     <div class="col-xs-12">
       <h1>{{ joInDetail.title}}</h1>
@@ -12,11 +12,12 @@
 
       <p>Field of work : {{joInDetail.fieldOfWork}}</p>
       <p>Salary estimate : {{joInDetail.salaryEstimate}}</p>
-      <button *ngIf="role==='CampChef'" class="btn btn-primary mBot5" (click)="getBestCandsEmail(joInDetail.id)">Get best candidates & email them
+      <button *ngIf="role==='CampChef'" class="btn btn-primary mBot5" (click)="getBestCandsEmail(joInDetail.id)">Get
+        best candidates & email them
       </button>
     </div>
   </div>
-<div *ngIf="!bestCands">
+
   <div class="row">
     <div class="col-xs-10">
       <ul class="nav nav-tabs mBot" role="tablist">
@@ -29,6 +30,10 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#companyDetails" role="tab">Company details</a>
         </li>
+        <li class="nav-item" *ngIf="bestCands == true && refugees.length != 0">
+          <a class="nav-link" data-toggle="tab" href="#bestCandidates" role="tab">Best Candidates</a>
+        </li>
+
       </ul>
 
       <!-- Tab panes -->
@@ -43,52 +48,138 @@
           <p><strong>Name: </strong>{{joInDetail.companyName}}</p>
           <p><strong>Address: </strong>{{joInDetail.companyAdress}}</p>
         </div>
+        <div class="tab-pane" id="bestCandidates" role="tabpanel">
+          <div class="list-group-item" *ngFor="let r of refugees">
+            <p><strong>Name </strong>{{r.firstname}} {{r.lastName}}</p>
+            <p><strong>Gender </strong>{{r.sex}}</p>
+            <p><strong>Date of birth </strong>{{r.dateOfBirth}}</p>
+            <p><strong>Nationality </strong>{{r.nationality}}</p>
+            <p><strong>French language level </strong>{{r.frenchlanguageLevel}}</p>
+            <p><strong>English language level </strong>{{r.englishlanguageLevel}}</p>
+            <p><strong>Highest degree </strong>{{r.highestDegree}}</p>
+            <p><strong>Years of experience </strong>{{r.yearsOfExperience}}</p>
+            <p><strong>Email </strong>{{r.email}}</p>
+            <p><strong>Field of work </strong>{{r.fieldOfWork}}</p>
+            <p><strong>Adress </strong>{{r.adress}}</p>
+            <p><strong>Phone number </strong>{{r.phoneNumber}}</p>
+            <hr>
+          </div>
+        </div>
       </div>
     </div>
+
+
   </div>
 </div>
-</div>
-<div *ngIf="etatInDetail" class="mTop">
-  <h1>Add a new job offer</h1>
+
+
+<div *ngIf="etatInDetail" >
+  <h1>{{jobOfferFound === null? "Add ":"Update "}}a job offer</h1>
   <form [formGroup]="jobofferForm"
         (ngSubmit)="onSubmit()">
 
     <div class="row">
       <div class="col-xs-10">
         <div class="col-xs-5">
-          <input placeholder="Title" class="form-control" required formControlName="title" type="text">
-          <textarea placeholder="Description" class="form-control" required formControlName="desc" cols="20"
-                    rows="3"></textarea>
-          <div class="mBot5">
-            <p-calendar
-              formControlName="bd"
-              showButtonBar="true"
-              [showIcon]="true"
-              placeholder="Start date"></p-calendar>
-          </div>
-          <div class="mBot5">
-            <p-calendar
-              formControlName="ed"
-              showButtonBar="true"
-              [showIcon]="true"
-              placeholder="End date"></p-calendar>
-          </div>
-          <input placeholder="Field of work" class="form-control" required formControlName="fow" type="text">
 
+          <div class="input-group input-group-sm ">
+
+            <input placeholder="Title" class="form-control" required  formControlName="title"
+                   type="text">
+            <span class="input-group-btn">
+    <button (click)="switchStateTitle()" [ngClass]="(etatMicTitle == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicTitle == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
+          <div class="input-group input-group-md ">
+
+            <textarea placeholder="Description" class="form-control" required formControlName="desc" cols="20"
+                      rows="5"></textarea>
+          <span class="input-group-btn">
+    <button (click)="switchStateDesc()" [ngClass]="(etatMicDesc == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicDesc == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
+          <div class="mBot5">
+            <input class="form-control" formControlName="bd" required type="date">
+          </div>
+          <div class="mBot5">
+            <input class="form-control" formControlName="ed" required type="date">
+          </div>
+
+          <div class="input-group input-group-sm">
+          <input placeholder="Field of work" class="form-control" required formControlName="fow" type="text">
+          <span class="input-group-btn">
+    <button (click)="switchStateFow()" [ngClass]="(etatMicFow == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicFow == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+          <div class="input-group input-group-sm">
           <input placeholder="Salary estimate" class="form-control" required formControlName="salaryE" type="number"
                  pattern="[0-9]+">
+          <span class="input-group-btn">
+    <button (click)="switchStateSalaryE()" [ngClass]="(etatMicSalaryE == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicSalaryE == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
         </div>
         <div class="col-xs-5">
+          <div class="input-group input-group-sm">
           <input placeholder="Contact name" class="form-control" required formControlName="contactN" type="text">
+          <span class="input-group-btn">
+    <button (click)="switchStateContactN()" [ngClass]="(etatMicContactN == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicContactN == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
+          <div class="input-group input-group-sm">
           <input placeholder="Contact email" class="form-control" required formControlName="contactE" type="text">
+          <span class="input-group-btn">
+    <button (click)="switchStateContactE()" [ngClass]="(etatMicContactE == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicContactE == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+
+          <div class="input-group input-group-sm ">
           <input placeholder="Contact number" class="form-control" required formControlName="contactNumber"
                  type="number" pattern="[0-9]+">
+          <span class="input-group-btn">
+    <button (click)="switchStateContactNumber()" [ngClass]="(etatMicContactNumber == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicContactNumber == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
+          <div class="input-group input-group-sm ">
           <input placeholder="Company name" class="form-control" required formControlName="companyN" type="text">
+          <span class="input-group-btn">
+    <button (click)="switchStateCompanyN()" [ngClass]="(etatMicCompanyN == false)?'btn btn-primary mBot5':'btn btn-danger mBot5'"
+            type="button">
+        <i [ngClass]="(etatMicCompanyN == false)?'fa fa-microphone':'fa fa-microphone-slash'"></i>
+    </button>
+            </span>
+          </div>
           <input placeholder="Company address" class="form-control" required formControlName="companyA" type="text">
-          <button
+
+            <button [disabled]="!jobofferForm.valid"
             type="submit"
             class="btn btn-primary">
-            <span><i class="fa fa-check"></i></span> Create
+            <span><i class="fa fa-check"></i></span> {{jobOfferFound === null? "Create":"Update"}}
           </button>
         </div>
       </div>
@@ -96,22 +187,3 @@
 
   </form>
 </div>
-<div *ngIf="bestCands" class="mTop">
-
-  <ul *ngFor="let r of refugees">
-    <li>{{r.firstname}} {{r.lastName}}</li>
-    <li>{{r.sex}}</li>
-    <li>{{r.dateOfBirth}}</li>
-    <li>{{r.nationality}}</li>
-    <li>{{r.frenchlanguageLevel}}</li>
-    <li>{{r.englishlanguageLevel}}</li>
-    <li>{{r.highestDegree}}</li>
-    <li>{{r.yearsOfExperience}}</li>
-    <li>{{r.email}}</li>
-    <li>{{r.fieldOfWork}}</li>
-    <li>{{r.adress}}</li>
-    <li>{{r.phoneNumber}}</li>
-  </ul>
-
-</div>
-

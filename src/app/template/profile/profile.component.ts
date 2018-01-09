@@ -4,7 +4,7 @@ import {User,Admin,CampChef,DistrictChef,Volunteer} from '../../entities/User'
 import {AuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'khr-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })

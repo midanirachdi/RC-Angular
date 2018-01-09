@@ -1,3 +1,6 @@
 .mTop25{
   margin-top: 25px;
 }
+.scrollAndFixedHeight{
+  overflow-x:auto;height: 648px;
+}

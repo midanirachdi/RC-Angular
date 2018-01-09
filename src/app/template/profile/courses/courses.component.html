@@ -1,0 +1,45 @@
+<h3>
+  <strong>Manage Courses</strong>
+</h3>
+<br>
+<button (click)="getAllCourses()">Refresh</button>
+<button (click)="etat2=!etat2">Add Course</button>
+<br>
+
+<!--//////-->
+<table class="table table-bordered">
+  <th class="info">Name</th>
+  <th class="info">StartDate</th>
+  <th class="info">EndDate</th>
+  <th class="info">Description</th>
+  <th></th>
+  <th>Modification</th>
+
+  <tr *ngFor="let c of courses">
+    <td>{{ c.name}}</td>
+    <td>{{ c.startdate}}</td>
+    <td>{{ c.enddate}}</td>
+    <td>{{ c.description}}</td>
+    <td>
+      <button><span class="fa fa-times" aria-hidden="true" (click)="deleteCourse(c)"></span></button>
+    </td>
+    <td>
+      <button (click)="showUpdate(c)">update</button>
+    </td>
+  </tr>
+</table>
+<!--////////-->
+<div *ngIf="error!=''">
+  {{error}}
+</div>
+<br>
+<div class="modal-dialog" *ngIf="etat2">
+  <form [formGroup]="courseForm"
+        (ngSubmit)="onSubmit()">
+    name :       <input formControlName="nam" class="form-control" type="text"><br>
+    Description: <input formControlName="descriptio" class="form-control" type="text"><br>
+    Startdate:   <input formControlName="startdat" class="form-control" type="date"><br>
+    Enddate :    <input formControlName="enddat" class="form-control" type="date"><br>
+    <button  class="btn btn-success" type="submit">ADD</button>
+  </form>
+</div>

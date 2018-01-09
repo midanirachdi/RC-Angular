@@ -14,6 +14,7 @@ export class JobOffersListComponent implements OnInit {
   jobOffers: Joboffer[];
   titleToSearch: string;
   etat = false;
+
   userSub:Subscription;
   user:User;
   role:string;
@@ -21,24 +22,53 @@ export class JobOffersListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getJO();
     this.userSub=this.authService.user.subscribe((u)=>{
       this.user=u;
     });
     this.role=localStorage.getItem('role');
-  }
+    this.getJO();
 
+    this.jobOfferService.jobOffersDetailList.subscribe(
+      (jobOffers:Joboffer[])=>{
+        this.jobOffers=jobOffers;
+        this.jobOffers=this.jobOffers.slice();
+      }
+    );
+  //   this.jobOfferService.jobOfferAdded.subscribe(
+  //     (jo:Joboffer)=>{
+  //       this.jobOffers.splice(0,0,jo);
+  //     this.jobOffers=this.jobOffers.slice();
+  //     }
+  // );
+    this.jobOfferService.jobOfferDeleted.subscribe(
+      (jo:Joboffer)=>{
+
+        this.jobOffers.splice(this.jobOffers.indexOf(jo),1);
+      }
+    );
+    this.jobOfferService.jobOfferUpdated.subscribe(
+      ()=>{
+        this.etat = !this.etat;
+        //this.jobOfferService.etat.emit(this.etat);
+        this.jobOfferService.jobOffers.emit(this.jobOffers);
+      }
+    );
+
+    this.jobOfferService.jobOffers.subscribe(
+      ()=>this.jobOfferService.getAllJobOffers().subscribe(
+        (joffers:Joboffer[])=>this.jobOffers=joffers
+      )
+    )
+  }
   getJO() {
     this.jobOfferService.getAllJobOffers().subscribe(
       (joboffers: Joboffer[]) => {
         this.jobOffers = joboffers;
-
       }
     );
   }
-
-  onDeleteJo(jobofferz: Joboffer[]) {
-    this.jobOfferService.jobOffers.subscribe(
+  getAllJO() {
+    this.jobOfferService.getAllJobOffers().subscribe(
       (joboffers: Joboffer[]) => {
         this.jobOffers = joboffers;
       }
@@ -49,5 +79,6 @@ export class JobOffersListComponent implements OnInit {
     this.etat = !this.etat;
     this.jobOfferService.etat.emit(this.etat);
   }
+
 
 }

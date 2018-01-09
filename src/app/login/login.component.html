@@ -1,4 +1,4 @@
-<ul class="nav navbar-nav navbar-right"  *ngIf="!connected; else elseBlock">
+<ul class="nav navbar-nav navbar-right"  [hidden]="authService.userLogged.getValue()==true">
     <li><p class="navbar-text">Already have an account?</p></li>
     <li class="dropdown">
       <a href="#" class="dropdown" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
@@ -36,19 +36,18 @@
        </form>
   </div>
   <div class="bottom text-center">
-      New here ? <a href="#"><b>Join Us</b></a>
+      New here ? <a [routerLink]="['/register']"><b>Join Us</b></a>
   </div>
 </div>
 </li>
 </ul>
 </li>
 </ul>
-<ng-template #elseBlock>
-    <div class="nav navbar-nav navbar-right" id="lged">
+
+    <div class="nav navbar-nav navbar-right" id="lged" [hidden]="authService.userLogged.getValue()==false">
         <nav class="nav nav-inline">
             <a (click)="onLogOut()" class="nav-link"><span class="poweroff"></span><i class="fa fa-power-off" aria-hidden="true"></i></a> 
             <a href="#" class="nav-link"><span class="ping"></span><i class="fa fa-envelope-o"></i></a>
              <a href="#" class="nav-link"><i class="fa fa-bell-o"></i></a> 
               <a routerLink='/profile' class="nav-link">{{user?.firstName}} {{user?.lastName}}</a> </nav>
       </div>
-</ng-template>

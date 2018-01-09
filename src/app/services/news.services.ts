@@ -19,6 +19,7 @@ export class NewsService {
   url='http://localhost:18080/refugeesCamp-web/api/news';
   header: HttpHeaders;
 
+
   httpOptions = {
     headers : new HttpHeaders({ 'Authorization': this.token , 'Content-Type': 'application/json'})
   };
@@ -71,21 +72,19 @@ export class NewsService {
   }
 
   public AddNews(n: News) {
-    console.log("za3ktek");
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
 
-    return this.http.post(this.url, JSON.stringify(n),  this.httpOptions).subscribe((response: Response) => {
-      return response;
-    });
+    return this.http.post(this.url, JSON.stringify(n),  {...this.httpOptions,responseType: 'text' }).subscribe();
   }
 
   public updateNews(n: News) {
-    return this.http.put(this.url, JSON.stringify(n));
+    return this.http.put(this.url, JSON.stringify(n),{...this.httpOptions,responseType: 'text' });
+
   }
 
   public deleteNews(n: News) {
-    return this.http.delete(this.url + '/' + n.id, this.httpOptions);
+    return this.http.delete(this.url + '/' + n.id, {...this.httpOptions,responseType: 'text' });
   }
 
 }

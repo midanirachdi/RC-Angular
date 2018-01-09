@@ -10,16 +10,13 @@ import { FacebookService, UIParams, UIResponse } from 'ngx-facebook';
 })
 export class EventsectionComponent implements OnInit {
   evenements: Evenement[];
-  constructor(private evenementService: EvenementService,private fb: FacebookService) { }
+  constructor(private evenementService: EvenementService, private fb: FacebookService) { }
 
   ngOnInit() {
-    this.getEvenements();
-  }
-  getEvenements(): void {
     this.evenementService.GetUpcoming()
-      .subscribe(evenements => this.evenements = evenements.slice(0, 3));
+      .subscribe(rep => this.evenements=rep.slice(0,3));
   }
-    
+
   faceshare(url: string) {
 
     let params: UIParams = {

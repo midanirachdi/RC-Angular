@@ -1,0 +1,68 @@
+<!-- == Banner== -->
+<div class="banner-area pdt100 pdb100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="banner-title">
+                    <h1>{{evenement?.name}}</h1>
+                    <ul>
+                        <li><a routerlink="">Home</a></li>
+                        <li>|</li>
+                        <li>Events</li>
+                        <li>|</li>
+                        <li><a class="active">{{evenement?.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // Banner -->
+<!-- == Upcomming Event == -->
+<div class="event-detail-body mt100 mb50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-8">
+                <div class="event-detail-item">
+                    <div class="image">
+                        <img src="assets/images/event/{{evenement?.imagename}}.jpg" class="img-responsive" alt="event image">
+                    </div>
+                    <div class="event-header-inner">
+                        <h4>{{evenement?.name}}</h4>
+
+                        <ul class="meta">
+                            <li class="bt-location"><i class="fa fa-map-marker"></i>{{evenement?.location}} <span>Africa</span></li>
+                            <li class="bt-location"><i class="fa fa-calendar-o"></i><span>{{evenement?.dateEvent|date:"dd"}} {{evenement?.dateEvent|date:"MMMM"}}, {{evenement?.dateEvent|date:"y"}}</span></li>
+                        </ul>
+                        <p-rating *ngIf="role==='Volunteer'" [(ngModel)]="val3" [cancel]="false" (onRate)="handleRate($event)" style="position:absolute;bottom:35%;left: 86%;"></p-rating>
+                    </div>
+                    <div class="event-contet">
+                        <p>{{evenement?.description}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4">
+                <aside class="social-widget">
+                    
+                             <a class="social" (click)="faceshare('https://www.facebook.com/HelpRefugeesUK/')" >
+                        <div class="btnshare" ></div>
+                    </a>
+                   
+                    <div class="social-media-inner">
+                        <ul class="social-media clearfix">
+                            <li>
+                                <a class="rss">
+                                            <i class="fa fa-star"></i>
+                                            <div>{{note}}</div>
+                                            <p>Rate</p>
+                                        </a>
+                            </li>
+
+                        </ul>
+                        <!-- /.social icon -->
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
