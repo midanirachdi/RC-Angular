@@ -1,0 +1,48 @@
+<h2>Edit Stock</h2>
+<br>
+<form (ngSubmit)="onSubmit(stockForm.value)" #stockForm="ngForm">
+  <table width="60%">
+    <tr>
+      <td>
+        <label>Stock Type</label>
+      </td>
+      <td>
+        {{currentstock.stockType}}
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <label>Quantity</label>
+      </td>
+      <td>
+        <input type="number" name="quantity" placeholder="Quantity" class="form-control" [(ngModel)]="currentstock.qteTotal">
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <label>Value</label>
+      </td>
+      <td>
+        <input type="number" name="value" placeholder="Value" class="form-control" [(ngModel)]="currentstock.stockValue">
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <label>Notes</label>
+      </td>
+      <td>
+        <input type="text" name="notes" placeholder="Notes" class="form-control" [(ngModel)]="currentstock.notes">
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="Submit" class="btn button-style-two btt">
+      </td>
+    </tr>
+  </table>
+</form>
+
