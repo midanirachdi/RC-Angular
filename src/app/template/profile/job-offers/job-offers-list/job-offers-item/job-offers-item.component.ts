@@ -21,7 +21,7 @@ export class JobOffersItemComponent implements OnInit {
   userSub: Subscription;
   user: User;
   role: string;
-  etat=false;
+  etat:boolean=false;
 
   constructor(private jobOfferService: JobofferService, private authService: AuthService) {
   }
@@ -34,10 +34,13 @@ export class JobOffersItemComponent implements OnInit {
 
   }
 
-  onSelected() {
+  onSelected(joboffer:Joboffer) {
     // this.etatInItem=false;
-    this.jobOfferService.jobOfferSelected.emit(this.joboffer);
+
+    this.jobOfferService.jobOfferSelected.emit(joboffer);
+    //this.jobOfferService.jobOfferFound.emit(null);
     this.jobOfferService.bestCands.emit(this.bestCands);
+
 
   }
 
@@ -50,15 +53,15 @@ export class JobOffersItemComponent implements OnInit {
   onUpdate(jobOffer: Joboffer){
 
       this.jobOfferService.getJobOfferById(jobOffer.id).subscribe(
-        (jobOffer: Joboffer) => {
+        (jo: Joboffer) => {
           this.etat=!this.etat;
-          this.jobOfferService.jobOfferFound.emit(jobOffer);
+          this.jobOfferService.jobOfferFound.emit(jo);
           this.jobOfferService.etat.emit(this.etat);
 
         }
       );
-
-    this.jobOfferService.jobOfferUpdated.emit(jobOffer);
+    this.onSelected(jobOffer);
+    this.jobOfferService.jobOfferUpdated.emit(null);
 
 
   }

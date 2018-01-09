@@ -256,7 +256,12 @@ export class JobOffersDetailComponent implements OnInit {
 
         }
       );
-      this.jobofferService.jobOfferAdded.emit(newJobOffer);
+      this.jobofferService.getAllJobOffers().subscribe(
+        (joboffers: Joboffer[]) => {
+          this.jobofferService.jobOffers.emit(null);
+        }
+      );
+
       this.jobofferService.etat.emit(this.etatInDetail);
     }
     else {

@@ -3,7 +3,7 @@ import { SelectItem } from 'primeng/primeng';
 import { Refugee } from '../../../entities/refugee';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RefugeesService } from '../../../services/refugees.service';
-
+declare var  $: any;
 @Component({
   selector: 'app-refugees',
   templateUrl: './refugees.component.html',
@@ -36,34 +36,15 @@ export class RefugeesComponent implements OnInit {
     sex : new FormControl('', Validators.required),
     dateOfBirth : new FormControl('', Validators.required),
     nationality : new FormControl('', Validators.required),
-    phoneNumber : new FormControl('', [Validators.required , Validators.min(10000000), Validators.max(99999999999)]),
-    email : new FormControl('', [Validators.required, Validators.email]),
+    phoneNumber : new FormControl('', Validators.compose([Validators.required , Validators.min(10000000), Validators.max(99999999999)])),
+    email : new FormControl('', Validators.compose([Validators.required, Validators.email])),
   });
   constructor(private refugeesService: RefugeesService) {
 
   }
 
   ngOnInit() {
-    let a,b;
     this.refugeesService.GetAllRefugees().subscribe((resp) => {console.log(resp); this.refugees = resp; this.filtredRefugees = resp; } );
-    this.refugeesService.getRefugeesPerGender('homme').subscribe((res: number) => (this.MaleRefugees = res , a = this.MaleRefugees, console.log(this.MaleRefugees),
-    this.refugeesService.getRefugeesPerGender('femme').subscribe((r: number) => (this.FemaleRefugees = r , console.log(this.FemaleRefugees),   this.data = {
-      labels: ['Male', 'Female'],
-      datasets: [
-          {
-              data: [this.MaleRefugees, this.FemaleRefugees],
-              backgroundColor: [
-                  "#FF6384",
-                  "#36A2EB"
-              ],
-              hoverBackgroundColor: [
-                  "#FF6384",
-                  "#36A2EB"
-              ]
-          }]
-      }
-    ) )));
-
   }
 
   DoAddRefugee() {
@@ -75,17 +56,19 @@ export class RefugeesComponent implements OnInit {
     this.refugee.nationality = this.RefugeeAddForm.value.nationality;
     this.refugee.email = this.RefugeeAddForm.value.email;
     this.refugeesService.AddRefugee(this.refugee).subscribe(
-      () =>  {     this.refugees.push(Object.assign({}, this.refugee));
-      this.refugee = {'id': null , 'firstname': null , 'lastName': null , 'sex': null, 'dateOfBirth': null ,
-        'nationality': null, 'frenchlanguageLevel': null , 'englishlanguageLevel': null, 'highestDegree': null ,
-         'yearsOfExperience': 3 , 'email': null, 'fieldOfWork': null, 'adress' : null, 'phoneNumber': null, 'fiche' : null  };
+      () =>  {
+         this.refugeesService.GetAllRefugees().subscribe((resp) => {console.log(resp); this.refugees = resp; this.filtredRefugees = resp; } );
+         $(function () {
+          $('#myModal').modal('toggle');
+       });
     });
+
   }
 
   DoDeleteRefugee(r: Refugee) {
     this.refugeesService.delete(r).subscribe(
-      res => this.refugees = this.refugees.filter(x => x.id !== r.id)
-    );
+      (res) => { this.refugees = this.refugees.filter(x => x.id !== r.id); this.filtredRefugees = this.filtredRefugees.filter(x => x.id !== r.id);
+      });
   }
 
   showDialog(r: Refugee) {
@@ -112,11 +95,12 @@ export class RefugeesComponent implements OnInit {
     this.refugee.nationality = this.RefugeeAddForm.value.nationality;
     this.refugee.email = this.RefugeeAddForm.value.email;
     this.refugeesService.updateRefugee(this.refugee).subscribe();
-    this.refugeesService.GetAllRefugees().subscribe((resp) => {this.refugees = resp; } );
+    this.refugeesService.GetAllRefugees().subscribe((resp) => {this.refugees = resp; this.filtredRefugees = resp; } );
+    this.display = false;
   }
 
-  findRefugeesByName(event: any){
-    this.filtredRefugees = this.refugees.filter(x=>x.firstname.toUpperCase().startsWith(event.target.value.toUpperCase()));
+  findRefugeesByName(event: any) {
+    this.filtredRefugees = this.refugees.filter(x => x.firstname.toUpperCase().startsWith(event.target.value.toUpperCase()));
   }
 
 }

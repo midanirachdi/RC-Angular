@@ -9,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
 export class JobofferService {
   jobOfferSelected = new EventEmitter<Joboffer>();
   jobOfferFound = new EventEmitter<Joboffer>();
-  jobOfferUpdated = new EventEmitter<Joboffer>();
+  jobOfferUpdated = new EventEmitter();
   jobOfferDeleted = new EventEmitter<Joboffer>();
   jobOfferAdded = new EventEmitter<Joboffer>();
   jobOfferHasBeenUpdated = new EventEmitter<Joboffer>();

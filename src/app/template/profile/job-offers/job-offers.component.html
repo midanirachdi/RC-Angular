@@ -6,7 +6,7 @@
     <app-job-offers-detail
       *ngIf="joSelected || etat;else infoText"
       [joInDetail]="joSelected" [etatInDetail]="etat"></app-job-offers-detail>
-    <ng-template #infoText>
+    <ng-template #infoText *ngIf="user">
       <strong>Please select a job offer to view the details</strong>
     </ng-template>
   </div>

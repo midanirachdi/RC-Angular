@@ -19,7 +19,7 @@ import { VolunteersectionComponent } from './template/homepage/volunteersection/
 import {RouterModule, Routes,CanActivate} from "@angular/router";
 import { ButtonModule, CalendarModule, DialogModule, ChartModule , RatingModule } from "primeng/primeng";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-//import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { JobOffersComponent } from './template/profile/job-offers/job-offers.component';
 import { HomepageComponent } from './template/homepage/homepage.component';
 import { ProfileComponent } from './template/profile/profile.component';
@@ -160,6 +160,7 @@ const tabRoute: Routes = [
     JsonpModule,
     ChartModule,
     RatingModule,
+    BrowserAnimationsModule
 
   ],
   providers: [

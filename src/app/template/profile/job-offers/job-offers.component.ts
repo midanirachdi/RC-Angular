@@ -2,6 +2,9 @@ import {JobofferService} from "../../../services/joboffer.service";
 import {Component, OnInit} from '@angular/core';
 import {Joboffer} from "../../../entities/joboffer";
 import {Refugee} from "../../../entities/refugee";
+import {User} from "../../../entities/User";
+import {Subscription} from "rxjs/Subscription";
+import {AuthService} from "../../../services/auth.service";
 
 
 @Component({
@@ -22,21 +25,31 @@ export class JobOffersComponent implements OnInit{
   etat =false;
   error = '';
 
-
-  constructor(private jobOfferService: JobofferService) {
+  userSub:Subscription;
+  user:User;
+  role:string;
+  constructor(private jobOfferService: JobofferService,private authService:AuthService) {
   }
 
   ngOnInit() {
+    this.userSub=this.authService.user.subscribe((u)=>{
+      this.user=u;
+    });
+    this.role=localStorage.getItem('role');
     this.jobOfferService.jobOfferSelected.subscribe(
       (jo: Joboffer) => {
         this.joSelected = jo;
-        // lol =>this.etat=true;
+        //fixed finally ~~~~~~~~~
+        this.jobOfferFound=null;
+        this.etat=false;
+        console.log(this.jobOfferFound);
       }
     );
     this.jobOfferService.jobOfferFound.subscribe(
-      ()=>this.jobOfferService.jobOfferSelected.subscribe(
-        (jo:Joboffer)=>this.joSelected=null
-      )
+      (jo:Joboffer)=>{
+        this.jobOfferFound=jo;
+      }
+
     );
       this.jobOfferService.etat.subscribe(
       (etat:boolean)=>{
