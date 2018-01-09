@@ -72,6 +72,8 @@ import { EvenementdetailsComponent } from './evenementdetails/evenementdetails.c
 import { DonationComponent } from './donation/donation.component';
 import { EvenementadminComponent } from './template/profile/evenementadmin/evenementadmin.component';
 import { ResumePipe } from './pipes/resume.pipe';
+import {CoursesComponent} from "./template/profile/courses/courses.component";
+import {CourseService} from "./services/course.service";
 
 const tabRoute: Routes = [
   {path: "", component: HomepageComponent, pathMatch: 'full'},
@@ -91,7 +93,8 @@ const tabRoute: Routes = [
       { path: "managenews", component: ManagenewsComponent },
       { path: "managenews/addnews", component: AddnewsComponent },
       { path: 'refugees', component: RefugeesComponent },
-      { path: 'eventadmin', component: EvenementadminComponent }
+      { path: 'eventadmin', component: EvenementadminComponent },
+      { path: "courses", component: CoursesComponent }
     ]
   }]
 
@@ -138,6 +141,7 @@ const tabRoute: Routes = [
     EvenementdetailsComponent,
     DonationComponent,
     EvenementadminComponent,
+    CoursesComponent,
     ResumePipe,
 
   ],
@@ -171,7 +175,8 @@ const tabRoute: Routes = [
     AuthGuard,
     RefugeesService,
     DonationService,
-    EvenementService
+    EvenementService,
+    CourseService
 
 
 
