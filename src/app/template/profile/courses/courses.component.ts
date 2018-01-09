@@ -66,6 +66,7 @@ export class CoursesComponent implements OnInit {
     if(this.courFound === null){
       console.log('triple');
       this.cs.add(newCourse).subscribe();
+
     }
     else{
       newCourse.id=this.courFound.id;

@@ -43,7 +43,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="single-input-box">
-                    <select required ngModel class="myselect" name="currency">
+                    <select  required ngModel class="myselect" name="currency">
+                      <option [ngValue]="undefined" disabled  selected> Please select currency </option>
                       <option value="USD" selected="selected">United States Dollars</option>
 	                    <option value="EUR">Euro</option>
                       <option value="GBP">United Kingdom Pounds</option>

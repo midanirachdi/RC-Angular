@@ -16,7 +16,7 @@ export class EvenementdetailsComponent implements OnInit {
   private sub: any;
   evenement:Evenement;
   idvolunteer:number;
-  note : string="none";
+  note : string="";
   role:string;
   constructor(private fb: FacebookService,private route: ActivatedRoute, private evenementService: EvenementService,private userservice:UserService) { }
 
@@ -36,7 +36,6 @@ export class EvenementdetailsComponent implements OnInit {
     this.evenementService.rateEvenement(this.idvolunteer,this.id,e.value).subscribe(t => {
       console.log(t);
     });
-    window.alert("You Rated this event with "+e.value);
   }
 
   faceshare(url: string) {
